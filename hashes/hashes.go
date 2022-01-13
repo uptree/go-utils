@@ -1,6 +1,7 @@
 package hashes
 
 import (
+	"crypto/hmac"
 	"crypto/md5"
 	"crypto/sha1"
 	"crypto/sha256"
@@ -30,6 +31,12 @@ func SHA256(text string) string {
 // SHA512 hashes using sha512 algorithm
 func SHA512(text string) string {
 	algorithm := sha512.New()
+	return stringHasher(algorithm, text)
+}
+
+// HmacSHA256 hashes using sha256 algorithm with a secret
+func HmacSHA256(text, secret string) string {
+	algorithm := hmac.New(sha256.New, []byte(secret))
 	return stringHasher(algorithm, text)
 }
 
