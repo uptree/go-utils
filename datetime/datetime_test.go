@@ -32,3 +32,11 @@ func TestToday(t *testing.T) {
 func TestTodayEndTime(t *testing.T) {
 	t.Logf("TodayEndTime: %d", TodayEndTime())
 }
+
+func TestWeekStartTime(t *testing.T) {
+	t.Logf("WeekStartTime: %d", WeekStartTime())
+}
+
+func TestMonthStartTime(t *testing.T) {
+	t.Logf("MonthStartTime: %d", MonthStartTime())
+}

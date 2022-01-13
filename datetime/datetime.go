@@ -56,3 +56,22 @@ func TodayEndTime() int64 {
 	tm1 := TodayStartTime() + 86400 - 1
 	return tm1
 }
+
+// WeekStartTime  Monday => 00:00:00 获取本周起始时间戳
+func WeekStartTime() int64 {
+	now := time.Now()
+	offset := int(time.Monday - now.Weekday())
+	if offset > 0 {
+		offset = -6
+	}
+	tm1 := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local).
+		AddDate(0, 0, offset)
+	return tm1.Unix()
+}
+
+// MonthStartTime 本月1日 => 00:00:00 获取本月起始时间戳
+func MonthStartTime() int64 {
+	now := time.Now()
+	tm1 := time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, time.Local)
+	return tm1.Unix()
+}
