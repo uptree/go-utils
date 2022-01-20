@@ -106,3 +106,8 @@ func RemoveDir(dirPath string) error {
 	}
 	return os.Remove(dirPath)
 }
+
+// Name 获取文件名.
+func Name(filePath string) string {
+	return filepath.Base(filePath)
+}

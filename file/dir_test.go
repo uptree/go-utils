@@ -52,3 +52,7 @@ func TestRemoveDir(t *testing.T) {
 	path2 := "dir1"
 	t.Logf("RemoveDir: %v", RemoveDir(path2))
 }
+
+func TestName(t *testing.T) {
+	t.Logf("Name: %v", Name("dir1/dir2/1.txt"))
+}
