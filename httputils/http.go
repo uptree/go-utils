@@ -24,3 +24,9 @@ func PostWithHeader(url string, msg []byte, headers map[string]string) (string, 
 	}
 	return string(body), nil
 }
+
+func PostWithAuthorization(url, authorization string, msg []byte) (string, error) {
+	headers := make(map[string]string)
+	headers["Authorization"] = authorization
+	return PostWithHeader(url, msg, headers)
+}
