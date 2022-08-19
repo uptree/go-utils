@@ -2,6 +2,7 @@ package datetime
 
 import (
 	"testing"
+	"time"
 )
 
 func TestTime(t *testing.T) {
@@ -29,14 +30,42 @@ func TestToday(t *testing.T) {
 	t.Logf("Today: %s", Today())
 }
 
+func TestTodayStartTime(t *testing.T) {
+	t.Logf("TodayStartTime: %v", TodayStartTime())
+}
+
 func TestTodayEndTime(t *testing.T) {
-	t.Logf("TodayEndTime: %d", TodayEndTime())
+	t.Logf("TodayEndTime: %v", TodayEndTime())
+}
+
+func TestDayStartTime(t *testing.T) {
+	t.Logf("DayStartTime: %v", DayStartTime(time.Now()))
+}
+
+func TestDayEndTime(t *testing.T) {
+	t.Logf("DayEndTime: %v", DayEndTime(time.Now()))
 }
 
 func TestWeekStartTime(t *testing.T) {
-	t.Logf("WeekStartTime: %d", WeekStartTime())
+	t.Logf("WeekStartTime: %v", WeekStartTime(time.Now()))
+}
+
+func TestWeekEndTime(t *testing.T) {
+	t.Logf("WeekEndTime: %v", WeekEndTime(time.Now()))
 }
 
 func TestMonthStartTime(t *testing.T) {
-	t.Logf("MonthStartTime: %d", MonthStartTime())
+	t.Logf("MonthStartTime: %v", MonthStartTime(time.Now()))
 }
+
+func TestMonthEndTime(t *testing.T) {
+	t.Logf("MonthEndTime: %v", MonthEndTime(time.Now()))
+}
+func TestYearStartTime(t *testing.T) {
+	t.Logf("YearStartTime: %v", YearStartTime(time.Now()))
+}
+
+func TestYearEndTime(t *testing.T) {
+	t.Logf("YearEndTime: %v", YearEndTime(time.Now()))
+}
+

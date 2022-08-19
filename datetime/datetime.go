@@ -44,34 +44,71 @@ func Today() string {
 	return Date(Time(), DayLayout)
 }
 
-// TodayStartTime  Today => 00:00:00 获取当天起始时间戳
-func TodayStartTime() int64 {
-	t := time.Now()
-	tm1 := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location()).Unix()
-	return tm1
+// TodayStartTime Today => 00:00:00 获取今天起始时间戳
+func TodayStartTime() time.Time {
+	return DayStartTime(time.Now())
 }
 
-// TodayEndTime Today => 23:59:59 获取当天结束时间戳
-func TodayEndTime() int64 {
-	tm1 := TodayStartTime() + 86400 - 1
-	return tm1
+// TodayEndTime Today => 23:59:59 获取今天结束时间戳
+func TodayEndTime() time.Time {
+	return DayEndTime(time.Now())
 }
 
-// WeekStartTime  Monday => 00:00:00 获取本周起始时间戳
-func WeekStartTime() int64 {
-	now := time.Now()
-	offset := int(time.Monday - now.Weekday())
+// DayStartTime Day => 00:00:00 获取当天起始时间戳
+func DayStartTime(t time.Time) time.Time {
+	tm2 := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, time.Local)
+	return tm2
+}
+
+// DayEndTime Day => 23:59:59 获取当天结束时间戳
+func DayEndTime(t time.Time) time.Time {
+	tm2 := time.Date(t.Year(), t.Month(), t.Day(), 23, 59, 59, 0, time.Local)
+	return tm2
+}
+
+// WeekStartTime Monday => 00:00:00 获取周起始时间戳
+func WeekStartTime(t time.Time) time.Time {
+	offset := int(time.Monday - t.Weekday())
 	if offset > 0 {
 		offset = -6
 	}
-	tm1 := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local).
+	tm2 := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, time.Local).
 		AddDate(0, 0, offset)
-	return tm1.Unix()
+	return tm2
 }
 
-// MonthStartTime 本月1日 => 00:00:00 获取本月起始时间戳
-func MonthStartTime() int64 {
-	now := time.Now()
-	tm1 := time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, time.Local)
-	return tm1.Unix()
+//WeekEndTime Sunday => 23:59:59 获取周结束时间戳
+func WeekEndTime(t time.Time) time.Time {
+	offset := 0
+	if w := t.Weekday(); w != 0 {
+		offset = int(time.Saturday + 1 - w)
+	}
+	tm2 := time.Date(t.Year(), t.Month(), t.Day(), 23, 59, 59, 0, time.Local).
+		AddDate(0, 0, offset)
+	return tm2
+}
+
+// MonthStartTime 月初 => 00:00:00 获取月起始时间戳
+func MonthStartTime(t time.Time) time.Time {
+	tm2 := time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, time.Local)
+	return tm2
+}
+
+// MonthEndTime 月末 => 23:59:59 获取月结束时间戳
+func MonthEndTime(t time.Time) time.Time {
+	e := MonthStartTime(t).AddDate(0, 1, -1)
+	tm2 := time.Date(t.Year(), t.Month(), e.Day(), 23, 59, 59, 0, time.Local)
+	return tm2
+}
+
+// YearStartTime 年初 => 00:00:00 获取年起始时间戳
+func YearStartTime(t time.Time) time.Time {
+	tm2 := time.Date(t.Year(), time.January, 1, 0, 0, 0, 0, time.Local)
+	return tm2
+}
+
+// YearEndTime 年末 => 23:59:59 获取年起始时间戳
+func YearEndTime(t time.Time) time.Time {
+	tm2 := time.Date(t.Year(), time.December, 31, 23, 59, 59, 0, time.Local)
+	return tm2
 }
