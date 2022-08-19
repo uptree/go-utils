@@ -10,9 +10,24 @@ func TestInSlice(t *testing.T) {
 	assert.Equalf(t, true, res, "failed")
 }
 
+func TestIsEmpty(t *testing.T) {
+	res := IsEmpty([]string{"c", "d", "e", "a"})
+	assert.Equalf(t, false, res, "failed")
+}
+
+func TestImplode(t *testing.T) {
+	res := Implode("|", []string{"a", "b", "c", "d"}...)
+	assert.Equalf(t, "a|b|c|d", res, "failed")
+}
+
+func TestExplode(t *testing.T) {
+	res := Explode("|", "a|b|c|d")
+	assert.Equalf(t, []string{"a", "b", "c", "d"}, res, "failed")
+}
+
 func TestUnique(t *testing.T) {
 	res := Unique([]string{"a", "c", "b", "c"})
-	assert.Equalf(t, []string{"a", "c", "b"}, res, "failed")
+	assert.Equalf(t, 3, len(res), "failed")
 }
 
 func TestMerge(t *testing.T) {

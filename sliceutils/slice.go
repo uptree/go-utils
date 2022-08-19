@@ -1,8 +1,12 @@
 package sliceutils
 
+import (
+	"strings"
+)
+
 // InSlice 判断字符串是否存在
-func InSlice(value string, s []string) bool {
-	for _, v := range s {
+func InSlice(value string, ss []string) bool {
+	for _, v := range ss {
 		if v == value {
 			return true
 		}
@@ -10,12 +14,31 @@ func InSlice(value string, s []string) bool {
 	return false
 }
 
+// IsEmpty 判断Slice是否为空
+func IsEmpty(ss []string) bool {
+	if len(ss) == 0 {
+		return true
+	}
+	return false
+}
+
+// Implode 别名 strings.Join
+func Implode(sep string, ss ...string) string {
+	return strings.Join(ss, sep)
+}
+
+// Explode 别名 strings.Split
+func Explode(sep string, s string) []string {
+	return strings.Split(s, sep)
+}
+
 // Unique slice去重
-func Unique(s []string) []string {
-	l := len(s)
+func Unique(ss []string) []string {
+	l := len(ss)
+	// 无法保障顺序
 	m := make(map[string]bool)
 	for i := 0; i < l; i++ {
-		m[s[i]] = true
+		m[ss[i]] = true
 	}
 
 	nl := len(m)
