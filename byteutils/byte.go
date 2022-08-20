@@ -6,8 +6,8 @@ import (
 	"unsafe"
 )
 
-// String2Bytes 强制转换
-func String2Bytes(s string) []byte {
+// StringToByte 强制转换 []byte(s)
+func StringToByte(s string) []byte {
 	sh := (*reflect.StringHeader)(unsafe.Pointer(&s))
 	bh := reflect.SliceHeader{
 		Data: sh.Data,
@@ -17,19 +17,19 @@ func String2Bytes(s string) []byte {
 	return *(*[]byte)(unsafe.Pointer(&bh))
 }
 
-// Bytes2String 强制转换
-func Bytes2String(b []byte) string {
+// ByteToString 强制转换 string(s)
+func ByteToString(b []byte) string {
 	return *(*string)(unsafe.Pointer(&b))
 }
 
-// Uint64ToBytes uint64转byte
-func Uint64ToBytes(i uint64) []byte {
+// Uint64ToByte uint64转byte
+func Uint64ToByte(i uint64) []byte {
 	var buf = make([]byte, 8)
 	binary.BigEndian.PutUint64(buf, i)
 	return buf
 }
 
-// BytesToUint64 byte转uint64
-func BytesToUint64(buf []byte) uint64 {
+// ByteToUint64 byte转uint64
+func ByteToUint64(buf []byte) uint64 {
 	return binary.BigEndian.Uint64(buf)
 }
