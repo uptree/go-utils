@@ -5,9 +5,9 @@ import (
 	"testing"
 )
 
-func TestStringToByte(t *testing.T) {
+func TestStringToBytes(t *testing.T) {
 	x := "Hello Gopher!"
-	y := StringToByte(x)
+	y := StringToBytes(x)
 	z := []byte(x)
 
 	if !bytes.Equal(y, z) {
@@ -15,9 +15,9 @@ func TestStringToByte(t *testing.T) {
 	}
 }
 
-func TestByteToString(t *testing.T) {
+func TestBytesToString(t *testing.T) {
 	x := []byte("Hello Gopher!")
-	y := ByteToString(x)
+	y := BytesToString(x)
 	z := string(x)
 
 	if y != z {
@@ -25,15 +25,15 @@ func TestByteToString(t *testing.T) {
 	}
 }
 
-func TestUint64ToByte(t *testing.T) {
+func TestUint64ToBytes(t *testing.T) {
 	x := uint64(1234567890)
-	y := Uint64ToByte(x)
+	y := Uint64ToBytes(x)
 	t.Logf("Uint64ToBytes: %b", y)
 }
 
-func TestByteToUint64(t *testing.T) {
+func TestBytesToUint64(t *testing.T) {
 	x := uint64(1234567890)
-	y := Uint64ToByte(x)
-	z := ByteToUint64(y)
+	y := Uint64ToBytes(x)
+	z := BytesToUint64(y)
 	t.Logf("%d", z)
 }
