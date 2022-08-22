@@ -65,3 +65,12 @@ func TestJsonToMap(t *testing.T) {
 	assert.Equalf(t, "b", m["a"], "failed")
 	assert.Equalf(t, "d", m["c"], "failed")
 }
+
+func TestBase64Encode(t *testing.T) {
+	assert.Equalf(t, "aGVsbG8=", Base64Encode([]byte("hello")), "failed")
+}
+
+func TestBase64Decode(t *testing.T) {
+	b, _ := Base64Decode("aGVsbG8=")
+	assert.Equalf(t, "hello", string(b), "failed")
+}
