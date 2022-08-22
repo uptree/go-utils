@@ -1,4 +1,4 @@
-package byteutils
+package byteutil
 
 import (
 	"bytes"
