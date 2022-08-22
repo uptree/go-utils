@@ -1,6 +1,7 @@
 package convert
 
 import (
+	"encoding/json"
 	"math"
 	"testing"
 
@@ -53,6 +54,16 @@ func TestIntToUint(t *testing.T) {
 
 func TestUintToInt(t *testing.T) {
 	assert.Equalf(t, 1234567, UintToInt(1234567), "failed")
+}
+
+func TestJsonNumberToInt(t *testing.T) {
+	type Data struct {
+		Number json.Number `json:"number"`
+	}
+	var d Data
+	_ = json.Unmarshal([]byte(`{"number":"1234567""}`), &d)
+	_ = json.Unmarshal([]byte(`{"number":1234567}`), &d)
+	assert.Equalf(t, 1234567, JsonNumberToInt(d.Number), "failed")
 }
 
 func TestMapToJson(t *testing.T) {

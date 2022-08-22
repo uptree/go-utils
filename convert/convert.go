@@ -107,6 +107,12 @@ func UintToInt(i uint) int {
 	return int(i)
 }
 
+// JsonNumberToInt json.Number => int
+func JsonNumberToInt(n json.Number) int {
+	i64, _ := n.Int64()
+	return int(i64)
+}
+
 // MapToJson map => json
 func MapToJson(m map[string]string) (string, error) {
 	b, e := json.Marshal(m)
