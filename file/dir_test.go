@@ -13,46 +13,42 @@ func TestSelfDir(t *testing.T) {
 }
 
 func TestMkDir(t *testing.T) {
-	path2 := "dir1/dir2/dir3"
-	t.Logf("Mkdir: %v", MkDir(path2))
+	dirPath := "testdata/dir/dir1"
+	t.Logf("Mkdir: %v", MkDir(dirPath))
 }
 
 func TestIsEmpty(t *testing.T) {
-	path2 := "dir1/dir2"
-	t.Logf("IsEmpty: %v", IsEmpty(path2))
+	dirPath := "testdata/dir"
+	t.Logf("IsEmpty: %v", IsEmpty(dirPath))
 }
 
 func TestIsDir(t *testing.T) {
-	path2 := "dir1/dir2"
-	t.Logf("IsDir: %v", IsDir(path2))
+	dirPath := "testdata/dir"
+	t.Logf("IsDir: %v", IsDir(dirPath))
 }
 
 func TestIsFile(t *testing.T) {
-	path2 := "dir1/dir2"
-	t.Logf("IsFile: %v", IsFile(path2))
+	dirPath := "testdata/dir"
+	t.Logf("IsFile: %v", IsFile(dirPath))
 }
 
 func TestListIndex(t *testing.T) {
-	path2 := "dir1"
-	files, dirs, err := ListIndex(path2)
+	dirPath := "testdata"
+	files, dirs, err := ListIndex(dirPath)
 	t.Logf("ListFiles: %v, %v, %v", files, dirs, err)
 }
 
 func TestClearDir(t *testing.T) {
-	path2 := "dir1/dir2/dir3"
-	t.Logf("ClearDir: %v", ClearDir(path2))
+	dirPath := "testdata/dir/dir1"
+	t.Logf("ClearDir: %v", ClearDir(dirPath))
 }
 
 func TestClearDirF(t *testing.T) {
-	path2 := "dir1"
-	t.Logf("ClearDirF: %v", ClearDirF(path2))
+	dirPath := "testdata"
+	t.Logf("ClearDirF: %v", ClearDirF(dirPath))
 }
 
 func TestRemoveDir(t *testing.T) {
-	path2 := "dir1"
-	t.Logf("RemoveDir: %v", RemoveDir(path2))
-}
-
-func TestName(t *testing.T) {
-	t.Logf("Name: %v", Name("dir1/dir2/1.txt"))
+	dirPath := "testdata"
+	t.Logf("RemoveDir: %v", RemoveDir(dirPath))
 }
