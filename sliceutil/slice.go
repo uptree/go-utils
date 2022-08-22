@@ -1,4 +1,4 @@
-package sliceutils
+package sliceutil
 
 import (
 	"strings"
