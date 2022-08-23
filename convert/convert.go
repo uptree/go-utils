@@ -74,6 +74,18 @@ func Float32ToString(f float32) string {
 	return strconv.FormatFloat(float64(f), 'f', -1, 32)
 }
 
+// StringToFloat64 string => float64
+func StringToFloat64(s string) float64 {
+	f, _ := strconv.ParseFloat(s, 64)
+	return f
+}
+
+// StringToFloat32 string => float32
+func StringToFloat32(s string) float32 {
+	f64, _ := strconv.ParseFloat(s, 32)
+	return float32(f64)
+}
+
 // StringToInt string => int
 func StringToInt(s string) int {
 	i, _ := strconv.Atoi(s)

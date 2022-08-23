@@ -32,6 +32,14 @@ func TestFloat32ToString(t *testing.T) {
 	assert.Equalf(t, "1.2345679", Float32ToString(float32(1.23456789)), "failed")
 }
 
+func TestStringToFloat64(t *testing.T) {
+	assert.Equalf(t, 1.23456789, StringToFloat64("1.23456789"), "failed")
+}
+
+func TestStringToFloat32(t *testing.T) {
+	assert.Equalf(t, float32(1.2345679), StringToFloat32("1.23456789"), "failed")
+}
+
 func TestStringToInt(t *testing.T) {
 	assert.Equalf(t, 1234567, StringToInt("1234567"), "failed")
 }
