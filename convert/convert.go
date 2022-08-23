@@ -87,13 +87,13 @@ func StringToInt32(s string) int32 {
 
 // StringToInt64 string => int64
 func StringToInt64(s string) int64 {
-	i, _ := strconv.ParseInt(s, 10, 0)
+	i, _ := strconv.ParseInt(s, 10, 64)
 	return i
 }
 
 // StringToUint64 string => uint64
 func StringToUint64(s string) uint64 {
-	i, _ := strconv.ParseUint(s, 10, 0)
+	i, _ := strconv.ParseUint(s, 10, 64)
 	return i
 }
 
