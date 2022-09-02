@@ -20,8 +20,8 @@ func WriteFile(fileName string, body [][]string, head []string) error {
 	w.UseCRLF = true
 	if len(head) > 0 {
 		r := csv.NewReader(f)
-		var record []string
-		if record, err = r.Read(); err != nil || len(record) == 0 {
+		var row []string
+		if row, err = r.Read(); err != nil || len(row) == 0 {
 			f.WriteString("\xEF\xBB\xBF")
 			if err = w.Write(head); err != nil {
 				return err
@@ -72,16 +72,16 @@ func ReadFile(fileName string) ([][]string, []string, error) {
 	return content[1:], content[0], nil
 }
 
-// ReadFileOffset 按行读取文件
+// ReadFileOffset 按行读取文件 offset >= 2
 func ReadFileOffset(fileName string, offset, limit int) ([][]string, []string, error) {
 	f, err := os.Open(fileName)
 	if err != nil {
 		return nil, nil, err
 	}
 	defer f.Close()
+	r := csv.NewReader(f)
 	body := make([][]string, 0)
 	head := make([]string, 0)
-	r := csv.NewReader(f)
 	counter := 1
 	for {
 		var row []string
