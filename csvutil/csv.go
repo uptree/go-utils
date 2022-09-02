@@ -72,6 +72,7 @@ func ReadFile(fileName string) ([][]string, []string, error) {
 	return content[1:], content[0], nil
 }
 
+// ReadFileOffset 按行读取文件
 func ReadFileOffset(fileName string, offset, limit int) ([][]string, []string, error) {
 	f, err := os.Open(fileName)
 	if err != nil {
