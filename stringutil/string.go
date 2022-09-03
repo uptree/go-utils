@@ -3,6 +3,7 @@ package stringutil
 import (
 	"bytes"
 	"net/url"
+	"regexp"
 	"strings"
 	"unicode"
 )
@@ -97,4 +98,10 @@ func InString(sub, str string) bool {
 		return true
 	}
 	return false
+}
+
+// RegexpReplace ...
+func RegexpReplace(src, expr, repl string) (string, error) {
+	reg, err := regexp.Compile(expr)
+	return reg.ReplaceAllString(src, repl), err
 }
