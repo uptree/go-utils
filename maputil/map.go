@@ -15,22 +15,40 @@ func HasKey(mp map[string]string, key string) bool {
 	return false
 }
 
+// Value ...
+func Value(mp map[string]string, key string) string {
+	if HasKey(mp, key) {
+		return mp[key]
+	}
+	return ""
+}
+
+// HasValue ...
+func HasValue(mp map[string]string, value string) bool {
+	for _, v := range mp {
+		if v == value {
+			return true
+		}
+	}
+	return false
+}
+
 // Keys ...
 func Keys(mp map[string]string) []string {
-	keys := make([]string, 0, len(mp))
+	ks := make([]string, 0, len(mp))
 	for k, _ := range mp {
-		keys = append(keys, k)
+		ks = append(ks, k)
 	}
-	return keys
+	return ks
 }
 
 // Values ...
 func Values(mp map[string]string) []string {
-	values := make([]string, 0, len(mp))
+	vs := make([]string, 0, len(mp))
 	for _, v := range mp {
-		values = append(values, v)
+		vs = append(vs, v)
 	}
-	return values
+	return vs
 }
 
 // KeyToLower convert keys to lower case.
