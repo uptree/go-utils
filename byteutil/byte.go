@@ -1,6 +1,7 @@
 package byteutil
 
 import (
+	"bytes"
 	"encoding/binary"
 	"reflect"
 	"unsafe"
@@ -30,6 +31,25 @@ func Uint64ToBytes(i uint64) []byte {
 }
 
 // BytesToUint64 byte转uint64
-func BytesToUint64(buf []byte) uint64 {
-	return binary.BigEndian.Uint64(buf)
+func BytesToUint64(b []byte) uint64 {
+	return binary.BigEndian.Uint64(b)
+}
+
+// Split 数据分片
+func Split(buf []byte, limit int) [][]byte {
+	var chunk []byte
+	chunks := make([][]byte, 0, len(buf)/limit+1)
+	for len(buf) >= limit {
+		chunk, buf = buf[:limit], buf[limit:]
+		chunks = append(chunks, chunk)
+	}
+	if len(buf) > 0 {
+		chunks = append(chunks, buf[:])
+	}
+	return chunks
+}
+
+// Join 数据合并
+func Join(s [][]byte) []byte {
+	return bytes.Join(s, []byte(""))
 }

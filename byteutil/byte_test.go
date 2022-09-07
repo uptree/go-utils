@@ -37,3 +37,13 @@ func TestBytesToUint64(t *testing.T) {
 	z := BytesToUint64(y)
 	t.Logf("%d", z)
 }
+
+func TestSplit(t *testing.T) {
+	slice := Split([]byte("Hello Gopher!"), 1)
+	t.Logf("%s", slice)
+}
+
+func TestJoin(t *testing.T) {
+	b := Join(Split([]byte("Hello Gopher!"), 1))
+	t.Logf("%s", b)
+}
