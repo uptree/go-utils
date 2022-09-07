@@ -5,34 +5,67 @@ import (
 	"strings"
 )
 
+// Mask 自定义字符脱敏 保留前f位和最后e位
+func Mask(s string, f, e int) string {
+	l := len(s)
+	if f+e >= l || f < 0 || e < 0 {
+		return ""
+	}
+	return s[0:f] + strings.Repeat("*", l-f-e) + s[l-e:]
+}
+
+// Left 保留前f位
+func Left(s string, f int) string {
+	return Mask(s, f, 0)
+}
+
+// Right 保留后e位
+func Right(s string, e int) string {
+	return Mask(s, 0, e)
+}
+
+// First 取值前f位
+func First(s string, f int) string {
+	l := len(s)
+	if l <= f || f < 0 {
+		return s
+	}
+	return s[0:f]
+}
+
+// Last 取值后e位
+func Last(s string, e int) string {
+	l := len(s)
+	if l <= e || e < 0 {
+		return s
+	}
+	return s[l-e:]
+}
+
+// LastFour 后四位
+func LastFour(s string) string {
+	return Last(s, 4)
+}
+
 // IdCard 身份证号脱敏
 func IdCard(s string) string {
+	if len(s) != 18 {
+		return ""
+	}
 	return s[0:4] + " **** **** " + s[len(s)-4:]
 }
 
 // IdCardStrict 严格身份证号脱敏
 func IdCardStrict(s string) string {
+	if len(s) != 18 {
+		return ""
+	}
 	return s[0:1] + "*** **** **** ***" + s[len(s)-1:]
 }
 
 // Mobile 手机号脱敏
 func Mobile(s string) string {
 	return s[0:3] + "****" + s[len(s)-4:]
-}
-
-// LastFour 后四位
-func LastFour(s string) string {
-	l := len(s)
-	if l <= 4 {
-		return s
-	}
-	return s[l-4:]
-}
-
-// Mask 自定义字符脱敏
-func Mask(cp string, front, end int) string {
-	l := len(cp)
-	return cp[0:front] + strings.Repeat("*", l-front-end) + cp[l-end:]
 }
 
 // ChineseName 中文姓名脱敏

@@ -13,6 +13,40 @@ func TestMask(t *testing.T) {
 	assert.Equalf(t, "1********23", s, "FAIL")
 }
 
+func TestLeft(t *testing.T) {
+	cp := "13844239123"
+	n := len(cp)
+	s := Left(cp, 1)
+	assert.Lenf(t, s, n, "长度:%d", n)
+	assert.Equalf(t, "1**********", s, "FAIL")
+}
+
+func TestRight(t *testing.T) {
+	cp := "13844239123"
+	n := len(cp)
+	s := Right(cp, 1)
+	assert.Lenf(t, s, n, "长度:%d", n)
+	assert.Equalf(t, "**********3", s, "FAIL")
+}
+
+func TestFirst(t *testing.T) {
+	assert.Equalf(t, "123", First("123", 4), "FAIL")
+	assert.Equalf(t, "1380", First("13800001234", 4), "FAIL")
+	assert.Equalf(t, "", First("460220202012210027", 0), "FAIL")
+}
+
+func TestLast(t *testing.T) {
+	assert.Equalf(t, "123", Last("123", 4), "FAIL")
+	assert.Equalf(t, "1234", Last("13800001234", 4), "FAIL")
+	assert.Equalf(t, "210027", Last("460220202012210027", 6), "FAIL")
+}
+
+func TestLastFour(t *testing.T) {
+	assert.Equalf(t, "123", LastFour("123"), "FAIL")
+	assert.Equalf(t, "1234", LastFour("13800001234"), "FAIL")
+	assert.Equalf(t, "0027", LastFour("460220202012210027"), "FAIL")
+}
+
 func TestIdCard(t *testing.T) {
 	assert.Equalf(t, "4602 **** **** 0027", IdCard("460220202012210027"), "FAIL")
 }
@@ -23,12 +57,6 @@ func TestIdCardStrict(t *testing.T) {
 
 func TestMobile(t *testing.T) {
 	assert.Equalf(t, "138****1234", Mobile("13800001234"), "FAIL")
-}
-
-func TestLastFour(t *testing.T) {
-	assert.Equalf(t, "123", LastFour("123"), "FAIL")
-	assert.Equalf(t, "1234", LastFour("13800001234"), "FAIL")
-	assert.Equalf(t, "0027", LastFour("460220202012210027"), "FAIL")
 }
 
 func TestChineseName(t *testing.T) {
