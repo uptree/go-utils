@@ -1,14 +1,14 @@
-package mosaic
+package mask
 
 import (
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func TestMosaic(t *testing.T) {
+func TestMask(t *testing.T) {
 	cp := "13844239123"
 	n := len(cp)
-	s := Mosaic(cp, 1, 2)
+	s := Mask(cp, 1, 2)
 	assert.Lenf(t, s, n, "长度:%d", n)
 	assert.Equalf(t, "1********23", s, "failed")
 }
@@ -42,7 +42,7 @@ func TestChineseName(t *testing.T) {
 
 }
 
-func TestSafeEmail(t *testing.T) {
+func TestEmail(t *testing.T) {
 	assert.Equalf(t, "*@g.com", Email("1@g.com"), "failed")
 	assert.Equalf(t, "1*@tsinghua.org.cn", Email("10@tsinghua.org.cn"), "failed")
 	assert.Equalf(t, "1**@163.com", Email("100@163.com"), "failed")

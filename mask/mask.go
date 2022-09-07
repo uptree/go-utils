@@ -1,4 +1,4 @@
-package mosaic
+package mask
 
 import "strings"
 
@@ -26,8 +26,8 @@ func LastFour(s string) string {
 	return s[l-4:]
 }
 
-// Mosaic 自定义字符脱敏
-func Mosaic(cp string, front, end int) string {
+// Mask 自定义字符脱敏
+func Mask(cp string, front, end int) string {
 	l := len(cp)
 	return cp[0:front] + strings.Repeat("*", l-front-end) + cp[l-end:]
 }
