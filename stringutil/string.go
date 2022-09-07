@@ -105,3 +105,11 @@ func RegexpReplace(src, expr, repl string) (string, error) {
 	reg, err := regexp.Compile(expr)
 	return reg.ReplaceAllString(src, repl), err
 }
+
+// TrimSpace 去除字符串前后空格、换行等
+func TrimSpace(s string) string {
+	s = strings.TrimSpace(s)
+	s = strings.Trim(s, "\t")
+	s = strings.Trim(s, "\n")
+	return s
+}

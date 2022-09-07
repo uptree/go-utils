@@ -85,3 +85,7 @@ func TestRegexpReplace(t *testing.T) {
 	s, _ := RegexpReplace("1000001", `0{2,}`, "0")
 	assert.Equalf(t, "101", s, "FAIL")
 }
+
+func TestTrimSpace(t *testing.T) {
+	assert.Equalf(t, "hello world", TrimSpace(" hello world \n"), "FAIL")
+}
