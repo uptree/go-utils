@@ -47,32 +47,38 @@ func Sha512(b []byte) []byte {
 
 // Sha512Hex hashes using sha512 algorithm
 func Sha512Hex(text string) string {
-	algorithm := sha512.New()
-	return StringHashes(algorithm, text)
+	return StringHashes(sha512.New(), text)
+}
+
+// HmacMd5 hashes using md5 algorithm with a secret
+func HmacMd5(b []byte, secret []byte) []byte {
+	algorithm := hmac.New(md5.New, secret)
+	return Hashes(algorithm, b)
+}
+
+// HmacMd5Hex hashes using md5 algorithm with a secret
+func HmacMd5Hex(text, secret string) string {
+	return StringHashes(hmac.New(md5.New, []byte(secret)), text)
 }
 
 // HmacSha256 hashes using sha256 algorithm with a secret
 func HmacSha256(b []byte, secret []byte) []byte {
-	algorithm := hmac.New(sha256.New, secret)
-	return Hashes(algorithm, b)
+	return Hashes(hmac.New(sha256.New, secret), b)
 }
 
 // HmacSha256Hex hashes using sha256 algorithm with a secret
 func HmacSha256Hex(text, secret string) string {
-	algorithm := hmac.New(sha256.New, []byte(secret))
-	return StringHashes(algorithm, text)
+	return StringHashes(hmac.New(sha256.New, []byte(secret)), text)
 }
 
 // HmacSha512 hashes using sha512 algorithm with a secret
 func HmacSha512(b []byte, secret []byte) []byte {
-	algorithm := hmac.New(sha512.New, secret)
-	return Hashes(algorithm, b)
+	return Hashes(hmac.New(sha512.New, secret), b)
 }
 
 // HmacSha512Hex hashes using sha512 algorithm with a secret
 func HmacSha512Hex(text, secret string) string {
-	algorithm := hmac.New(sha512.New, []byte(secret))
-	return StringHashes(algorithm, text)
+	return StringHashes(hmac.New(sha512.New, []byte(secret)), text)
 }
 
 // StringHashes hashes string
