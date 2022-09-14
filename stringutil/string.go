@@ -109,7 +109,8 @@ func RegexpReplace(src, expr, repl string) (string, error) {
 // TrimSpace 去除字符串前后空格、换行等
 func TrimSpace(s string) string {
 	s = strings.TrimSpace(s)
-	s = strings.Trim(s, "\t")
+	s = strings.Trim(s, "\r")
 	s = strings.Trim(s, "\n")
+	s = strings.Trim(s, "\t")
 	return s
 }
