@@ -3,7 +3,7 @@ package convert
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/uptree/go-utils/assert"
 )
 
 func TestFenToYuan(t *testing.T) {

@@ -1,8 +1,9 @@
 package mask
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/uptree/go-utils/assert"
 )
 
 func TestMask(t *testing.T) {
@@ -10,7 +11,7 @@ func TestMask(t *testing.T) {
 	n := len(cp)
 	s := Mask(cp, 1, 2)
 	assert.Lenf(t, s, n, "长度:%d", n)
-	assert.Equalf(t, "1********23", s, "FAIL")
+	assert.Equalf(t, "1********231", s, "FAIL")
 }
 
 func TestLeft(t *testing.T) {

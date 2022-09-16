@@ -3,7 +3,7 @@ package rsautil
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/uptree/go-utils/assert"
 )
 
 func TestSignSha256Base64(t *testing.T) {

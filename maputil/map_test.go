@@ -3,7 +3,7 @@ package maputil
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/uptree/go-utils/assert"
 )
 
 func TestIsEmpty(t *testing.T) {

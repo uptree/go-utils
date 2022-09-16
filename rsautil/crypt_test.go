@@ -1,8 +1,9 @@
 package rsautil
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/uptree/go-utils/assert"
 )
 
 func TestEncryptToBase64(t *testing.T) {

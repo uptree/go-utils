@@ -1,10 +1,10 @@
 package rsautil
 
 import (
-	"github.com/uptree/go-utils/fileutil"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/uptree/go-utils/assert"
+	"github.com/uptree/go-utils/fileutil"
 )
 
 func TestGenerateRsaKeyPemFile(t *testing.T) {

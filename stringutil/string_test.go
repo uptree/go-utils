@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/uptree/go-utils/assert"
 )
 
 func TestReverse(t *testing.T) {

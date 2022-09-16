@@ -1,8 +1,9 @@
 package sliceutil
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/uptree/go-utils/assert"
 )
 
 func TestInSlice(t *testing.T) {
