@@ -1,7 +1,6 @@
 package mask
 
 import (
-	"net/url"
 	"strings"
 )
 
@@ -93,13 +92,4 @@ func Email(s string) string {
 	}
 	r := []rune(s)
 	return string(r[0:1]) + strings.Repeat("*", l-1) + "@" + ss[1]
-}
-
-//URL url脱敏
-func URL(i string) string {
-	u, err := url.Parse(i)
-	if err != nil {
-		return i
-	}
-	return u.Redacted()
 }

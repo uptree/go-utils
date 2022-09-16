@@ -78,9 +78,3 @@ func TestEmail(t *testing.T) {
 	assert.Equalf(t, "1****@sina.com.cn", Email("10000@sina.com.cn"), "FAIL")
 	assert.Equalf(t, "1**********@gmail.com", Email("13312345678@gmail.com"), "FAIL")
 }
-
-func TestURL(t *testing.T) {
-	assert.Equalf(t, "http://root:xxxxx@localhost:22/uri",
-		URL("http://root:mysecretpassword@localhost:22/uri"), "FAIL")
-	assert.Equalf(t, "https://www.qq.com", URL("https://www.qq.com"), "FAIL")
-}
