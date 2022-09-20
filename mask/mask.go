@@ -13,13 +13,13 @@ func Mask(s string, f, e int) string {
 	return s[0:f] + strings.Repeat("*", l-f-e) + s[l-e:]
 }
 
-// Left 保留前f位
-func Left(s string, f int) string {
+// Before 保留前f位
+func Before(s string, f int) string {
 	return Mask(s, f, 0)
 }
 
-// Right 保留后e位
-func Right(s string, e int) string {
+// After 保留后e位
+func After(s string, e int) string {
 	return Mask(s, 0, e)
 }
 

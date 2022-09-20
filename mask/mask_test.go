@@ -11,21 +11,21 @@ func TestMask(t *testing.T) {
 	n := len(cp)
 	s := Mask(cp, 1, 2)
 	assert.Lenf(t, s, n, "长度:%d", n)
-	assert.Equalf(t, "1********231", s, "FAIL")
+	assert.Equalf(t, "1********23", s, "FAIL")
 }
 
-func TestLeft(t *testing.T) {
+func TestBefore(t *testing.T) {
 	cp := "13844239123"
 	n := len(cp)
-	s := Left(cp, 1)
+	s := Before(cp, 1)
 	assert.Lenf(t, s, n, "长度:%d", n)
 	assert.Equalf(t, "1**********", s, "FAIL")
 }
 
-func TestRight(t *testing.T) {
+func TestAfter(t *testing.T) {
 	cp := "13844239123"
 	n := len(cp)
-	s := Right(cp, 1)
+	s := After(cp, 1)
 	assert.Lenf(t, s, n, "长度:%d", n)
 	assert.Equalf(t, "**********3", s, "FAIL")
 }
