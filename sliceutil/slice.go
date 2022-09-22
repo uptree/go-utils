@@ -5,9 +5,9 @@ import (
 )
 
 // InSlice 判断字符串是否存在
-func InSlice(value string, ss []string) bool {
+func InSlice(s string, ss []string) bool {
 	for _, v := range ss {
-		if v == value {
+		if v == s {
 			return true
 		}
 	}
@@ -101,6 +101,26 @@ func Difference(slice1, slice2 []string) []string {
 	return n
 }
 
+// Filter slice过滤, 默认过滤空值
+func Filter(ss []string, filter ...func(s string) bool) []string {
+	var fn func(s string) bool
+	if len(filter) > 0 && filter[0] != nil {
+		fn = filter[0]
+	} else {
+		fn = func(s string) bool {
+			return s != ""
+		}
+	}
+
+	ns := make([]string, 0, len(ss))
+	for _, s := range ss {
+		if fn(s) {
+			ns = append(ns, s)
+		}
+	}
+	return ns
+}
+
 // IntersectUint64 slice交集
 func IntersectUint64(slice1, slice2 []uint64) []uint64 {
 	m := make(map[uint64]int)
@@ -137,14 +157,14 @@ func DifferenceUint64(slice1, slice2 []uint64) []uint64 {
 	m := make(map[uint64]int)
 	n := make([]uint64, 0)
 	inter := IntersectUint64(slice1, slice2)
-	for _, v := range inter {
-		m[v]++
+	for _, i := range inter {
+		m[i]++
 	}
 
-	for _, value := range slice1 {
-		times, _ := m[value]
+	for _, v := range slice1 {
+		times, _ := m[v]
 		if times == 0 {
-			n = append(n, value)
+			n = append(n, v)
 		}
 	}
 	return n
@@ -186,14 +206,14 @@ func DifferenceInterface(slice1, slice2 []interface{}) []interface{} {
 	m := make(map[interface{}]int)
 	n := make([]interface{}, 0)
 	inter := IntersectInterface(slice1, slice2)
-	for _, v := range inter {
-		m[v]++
+	for _, i := range inter {
+		m[i]++
 	}
 
-	for _, value := range slice1 {
-		times, _ := m[value]
+	for _, v := range slice1 {
+		times, _ := m[v]
 		if times == 0 {
-			n = append(n, value)
+			n = append(n, v)
 		}
 	}
 	return n
