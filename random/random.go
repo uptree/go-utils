@@ -13,9 +13,9 @@ var (
 )
 
 const (
-	EnglishCharUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	EnglishCharLowerCase = "abcdefghijklmnopqrstuvwxyz"
-	NumberChar           = "0123456789"
+	CharUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	CharLowerCase = "abcdefghijklmnopqrstuvwxyz"
+	CharNumber    = "0123456789"
 )
 
 // GetRandomInt 生成值小于max的随机数
@@ -26,7 +26,7 @@ func GetRandomInt(max int) int {
 
 // GetRandomChars 生成英文字母随机字符串
 func GetRandomChars(num int) string {
-	return GetRandomString(num, EnglishCharUpperCase+EnglishCharLowerCase)
+	return GetRandomString(num, CharUpperCase+CharLowerCase)
 }
 
 // GetRandomNumbers 生成数字类型随机字符串
@@ -36,7 +36,7 @@ func GetRandomNumbers(num int) string {
 
 // GetRandomString 生成随机字符串
 func GetRandomString(num int, ss ...string) string {
-	s := NumberChar
+	s := CharNumber
 	if len(ss) > 0 {
 		s = ss[0]
 	}
