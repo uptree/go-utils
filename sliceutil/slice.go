@@ -34,23 +34,14 @@ func Explode(sep string, s string) []string {
 
 // Unique slice去重
 func Unique(ss []string) []string {
-	l := len(ss)
-	// 无法保障顺序
-	m := make(map[string]bool)
-	for i := 0; i < l; i++ {
-		m[ss[i]] = true
+	ns := make([]string, 0)
+	for _, s := range ss {
+		if InSlice(s, ns) {
+			break
+		}
+		ns = append(ns, s)
 	}
-
-	nl := len(m)
-	n := make([]string, nl)
-
-	i := 0
-	for v := range m {
-		n[i] = v
-		i++
-	}
-
-	return n
+	return ns
 }
 
 // Merge slice合并 - 不去重
