@@ -12,6 +12,12 @@ var (
 	l        sync.Mutex
 )
 
+const (
+	EnglishCharUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	EnglishCharLowerCase = "abcdefghijklmnopqrstuvwxyz"
+	NumberChar           = "0123456789"
+)
+
 // GetRandomInt 生成值小于max的随机数
 func GetRandomInt(max int) int {
 	rand.Seed(getRandSeek())
@@ -20,8 +26,7 @@ func GetRandomInt(max int) int {
 
 // GetRandomChars 生成英文字母随机字符串
 func GetRandomChars(num int) string {
-	ss := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	return GetRandomString(num, ss)
+	return GetRandomString(num, EnglishCharUpperCase+EnglishCharLowerCase)
 }
 
 // GetRandomNumbers 生成数字类型随机字符串
@@ -30,19 +35,55 @@ func GetRandomNumbers(num int) string {
 }
 
 // GetRandomString 生成随机字符串
-func GetRandomString(num int, str ...string) string {
-	s := "0123456789"
-	if len(str) > 0 {
-		s = str[0]
+func GetRandomString(num int, ss ...string) string {
+	s := NumberChar
+	if len(ss) > 0 {
+		s = ss[0]
 	}
-	l := len(s)
+	le := len(s)
 	r := rand.New(rand.NewSource(getRandSeek()))
 	var buf bytes.Buffer
 	for i := 0; i < num; i++ {
-		x := r.Intn(l)
+		x := r.Intn(le)
 		buf.WriteString(s[x : x+1])
 	}
 	return buf.String()
+}
+
+// GetRandomSlice 随机取num个slice元素，允许重复取
+func GetRandomSlice(num int, ss []interface{}) []interface{} {
+	ns := make([]interface{}, 0)
+	r := rand.New(rand.NewSource(getRandSeek()))
+	for i := 0; i < num; i++ {
+		ns = append(ns, ss[r.Intn(len(ss))])
+	}
+	return ns
+}
+
+func GetRandomInVisible(num int) string {
+	//Zs
+	inVisibleChar := []rune{
+		'\u2000',
+		'\u2001',
+		'\u2002',
+		'\u2003',
+		'\u2004',
+		'\u2005',
+		'\u2006',
+		'\u2007',
+		'\u2008',
+		'\u2009',
+		'\u200A',
+		'\u202F',
+		'\u205F',
+		'\u3000',
+	}
+	cc := make([]rune, 0)
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < num; i++ {
+		cc = append(cc, inVisibleChar[r.Intn(len(inVisibleChar))])
+	}
+	return string(cc)
 }
 
 func getRandSeek() int64 {

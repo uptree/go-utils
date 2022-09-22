@@ -23,3 +23,14 @@ func TestGetRandomInt(t *testing.T) {
 	t.Logf("GetRandomInt: %d", GetRandomInt(10))
 	t.Logf("GetRandomInt: %d", GetRandomInt(10000))
 }
+
+func TestGetRandomSlice(t *testing.T) {
+
+	s := GetRandomSlice(2, []interface{}{"水", "蜜", "🍑"})
+	t.Logf("GetRandomSlice: %s", s)
+}
+
+func TestGetRandomInVisible(t *testing.T) {
+	s := GetRandomInVisible(1)
+	t.Logf("GetRandomInVisible: %d", len(s))
+}
