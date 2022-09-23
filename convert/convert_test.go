@@ -93,3 +93,13 @@ func TestBase64Decode(t *testing.T) {
 	b, _ := Base64Decode("aGVsbG8=")
 	assert.Equalf(t, "hello", string(b), "FAIL")
 }
+
+func TestBoolToInt(t *testing.T) {
+	assert.Equalf(t, 1, BoolToInt(true), "FAIL")
+	assert.Equalf(t, 0, BoolToInt(false), "FAIL")
+}
+
+func TestIntToBool(t *testing.T) {
+	assert.Equalf(t, true, IntToBool(1), "FAIL")
+	assert.Equalf(t, false, IntToBool(0), "FAIL")
+}

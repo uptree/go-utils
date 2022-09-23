@@ -89,3 +89,7 @@ func TestRegexpReplace(t *testing.T) {
 func TestTrimSpace(t *testing.T) {
 	assert.Equalf(t, "hello world", TrimSpace(" hello world \n"), "FAIL")
 }
+
+func TestReplaceSpace(t *testing.T) {
+	assert.Equalf(t, "helloworld", ReplaceSpace("he llo wo\r\t r ld \n"), "FAIL")
+}

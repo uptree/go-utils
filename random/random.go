@@ -31,12 +31,12 @@ func GetRandomChars(num int) string {
 
 // GetRandomNumbers 生成数字类型随机字符串
 func GetRandomNumbers(num int) string {
-	return GetRandomString(num)
+	return GetRandomString(num, CharNumber)
 }
 
 // GetRandomString 生成随机字符串
 func GetRandomString(num int, ss ...string) string {
-	s := CharNumber
+	s := CharNumber + CharLowerCase
 	if len(ss) > 0 {
 		s = ss[0]
 	}

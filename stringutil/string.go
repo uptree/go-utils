@@ -114,3 +114,13 @@ func TrimSpace(s string) string {
 	s = strings.Trim(s, "\t")
 	return s
 }
+
+// ReplaceSpace 去除字符串全部空格、换行等
+func ReplaceSpace(s string) string {
+	s = strings.ReplaceAll(s, " ", "")
+	s = strings.ReplaceAll(s, "\t", "")
+	s = strings.ReplaceAll(s, "\n", "")
+	s = strings.ReplaceAll(s, "\r", "")
+	s = strings.TrimSpace(s)
+	return s
+}

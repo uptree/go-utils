@@ -153,3 +153,19 @@ func Base64Encode(src []byte) string {
 func Base64Decode(src string) ([]byte, error) {
 	return base64.StdEncoding.DecodeString(src)
 }
+
+// BoolToInt ...
+func BoolToInt(b bool) int {
+	if b {
+		return 1
+	}
+	return 0
+}
+
+// IntToBool ...
+func IntToBool(i int) bool {
+	if i > 0 {
+		return true
+	}
+	return false
+}
