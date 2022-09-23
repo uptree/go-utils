@@ -47,3 +47,36 @@ func TestJoin(t *testing.T) {
 	b := Join(Split([]byte("Hello Gopher!"), 1))
 	t.Logf("%s", b)
 }
+
+// go test -bench="." -benchmem
+// 标准转换string()
+func Benchmark_NormalBytesToString(b *testing.B) {
+	x := []byte("Hello Gopher! Hello Gopher! Hello Gopher!")
+	for i := 0; i < b.N; i++ {
+		_ = string(x)
+	}
+}
+
+// 强转换[]byte到string
+func Benchmark_BytesToString(b *testing.B) {
+	x := []byte("Hello Gopher! Hello Gopher! Hello Gopher!")
+	for i := 0; i < b.N; i++ {
+		_ = BytesToString(x)
+	}
+}
+
+// 标准转换[]byte
+func Benchmark_NormalStringToBytes(b *testing.B) {
+	x := "Hello Gopher! Hello Gopher! Hello Gopher!"
+	for i := 0; i < b.N; i++ {
+		_ = []byte(x)
+	}
+}
+
+// 强转换string到[]byte
+func Benchmark_StringToBytes(b *testing.B) {
+	x := "Hello Gopher! Hello Gopher! Hello Gopher!"
+	for i := 0; i < b.N; i++ {
+		_ = StringToBytes(x)
+	}
+}
