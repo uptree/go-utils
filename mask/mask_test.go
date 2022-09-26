@@ -50,14 +50,17 @@ func TestLastFour(t *testing.T) {
 
 func TestIdCard(t *testing.T) {
 	assert.Equalf(t, "4602 **** **** 0027", IdCard("460220202012210027"), "FAIL")
+	assert.Equalf(t, "", IdCard("46022020201210027"), "FAIL")
 }
 
 func TestIdCardStrict(t *testing.T) {
 	assert.Equalf(t, "4*** **** **** ***7", IdCardStrict("460220202012210027"), "FAIL")
+	assert.Equalf(t, "", IdCardStrict("46022020202210027"), "FAIL")
 }
 
 func TestMobile(t *testing.T) {
 	assert.Equalf(t, "138****1234", Mobile("13800001234"), "FAIL")
+	assert.Equalf(t, "13800034", Mobile("13800034"), "FAIL")
 }
 
 func TestChineseName(t *testing.T) {
@@ -68,6 +71,7 @@ func TestChineseName(t *testing.T) {
 	assert.Equalf(t, "斯**日乐", ChineseName("斯琴格日乐"), "FAIL")
 	assert.Equalf(t, "阿********西提", ChineseName("阿不来提 阿卜杜热西提"), "FAIL")
 	assert.Equalf(t, "C***尔多", ChineseName("C 罗纳尔多"), "FAIL")
+	assert.Equalf(t, "", ChineseName(""), "FAIL")
 
 }
 
@@ -78,4 +82,10 @@ func TestEmail(t *testing.T) {
 	assert.Equalf(t, "1***@foxmail.com", Email("1000@foxmail.com"), "FAIL")
 	assert.Equalf(t, "1****@sina.com.cn", Email("10000@sina.com.cn"), "FAIL")
 	assert.Equalf(t, "1**********@gmail.com", Email("13312345678@gmail.com"), "FAIL")
+	assert.Equalf(t, "gmail.com", Email("gmail.com"), "FAIL")
+	assert.Equalf(t, "", Email(""), "FAIL")
+}
+
+func TestIP(t *testing.T) {
+	assert.Equalf(t, "127.***.***.1", IP("127.0.0.1"), "FAIL")
 }

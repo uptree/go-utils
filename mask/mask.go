@@ -64,11 +64,17 @@ func IdCardStrict(s string) string {
 
 // Mobile 手机号脱敏
 func Mobile(s string) string {
+	if len(s) != 11 {
+		return s
+	}
 	return s[0:3] + "****" + s[len(s)-4:]
 }
 
 // ChineseName 中文姓名脱敏
 func ChineseName(s string) string {
+	if s == "" {
+		return ""
+	}
 	r := []rune(s)
 	l := len(r)
 	if l == 2 {
@@ -86,10 +92,27 @@ func ChineseName(s string) string {
 // Email 邮箱脱敏
 func Email(s string) string {
 	ss := strings.Split(s, "@")
+	if len(ss) != 2 {
+		return s
+	}
 	l := len(ss[0])
 	if l <= 1 {
 		return "*@" + ss[1]
 	}
 	r := []rune(s)
 	return string(r[0:1]) + strings.Repeat("*", l-1) + "@" + ss[1]
+}
+
+// IP ip地址脱敏
+func IP(ip string) string {
+	if len(ip) == 0 {
+		return ip
+	}
+	ss := strings.Split(ip, ".")
+	if len(ss) != 4 {
+		return ip
+	}
+	ss[1] = "***"
+	ss[2] = "***"
+	return strings.Join(ss, ".")
 }
