@@ -79,3 +79,18 @@ func TestHmacSha512Hex(t *testing.T) {
 	key := "secret"
 	assert.Equalf(t, hex.EncodeToString(HmacSha512([]byte(s), []byte(key))), HmacSha512Hex(s, key), "FAIL")
 }
+
+func TestTime33(t *testing.T) {
+	num := Time33("hello")
+	t.Log(num)
+}
+
+func TestCrc32(t *testing.T) {
+	num := Crc32([]byte("hello"))
+	t.Log(num)
+}
+
+func TestCrc64(t *testing.T) {
+	num := Crc64([]byte("hello"))
+	t.Log(num)
+}

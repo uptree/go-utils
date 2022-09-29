@@ -8,6 +8,8 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"hash"
+	"hash/crc32"
+	"hash/crc64"
 )
 
 // Md5 hashes using md5 algorithm
@@ -90,4 +92,26 @@ func StringHashes(algorithm hash.Hash, text string) string {
 func Hashes(algorithm hash.Hash, b []byte) []byte {
 	algorithm.Write(b)
 	return algorithm.Sum(nil)
+}
+
+// Time33 ...
+func Time33(text string) int {
+	hash := 5381
+	length := len(text)
+	for i := 0; i < length; i++ {
+		hash += (hash << 5) + int(text[i])
+	}
+	// other: hash ^ (hash >> 32)
+	return hash & 0x7FFFFFFF
+}
+
+// Crc32 ...
+func Crc32(b []byte) uint32 {
+	return crc32.ChecksumIEEE(b)
+}
+
+// Crc64 ...
+func Crc64(b []byte) uint64 {
+	tab := crc64.MakeTable(crc64.ISO)
+	return crc64.Checksum(b, tab)
 }
