@@ -124,3 +124,18 @@ func ReplaceSpace(s string) string {
 	s = strings.TrimSpace(s)
 	return s
 }
+
+// JoinSkipEmpty ...
+func JoinSkipEmpty(sep string, ss ...string) string {
+	var buf bytes.Buffer
+	for _, v := range ss {
+		if v == "" {
+			continue
+		}
+		if buf.Len() > 0 {
+			buf.WriteString(sep)
+		}
+		buf.WriteString(v)
+	}
+	return buf.String()
+}

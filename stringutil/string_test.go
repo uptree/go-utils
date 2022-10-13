@@ -93,3 +93,7 @@ func TestTrimSpace(t *testing.T) {
 func TestReplaceSpace(t *testing.T) {
 	assert.Equalf(t, "helloworld", ReplaceSpace("he llo wo\r\t r ld \n"), "FAIL")
 }
+
+func TestJoinSkipEmpty(t *testing.T) {
+	assert.Equalf(t, "a|b|c|d", JoinSkipEmpty("|", []string{"a", "b", "c", "", "d"}...), "FAIL")
+}
