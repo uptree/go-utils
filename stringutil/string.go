@@ -8,6 +8,21 @@ import (
 	"unicode"
 )
 
+var (
+	// DefaultTrimChars are the characters which are stripped by Trim* functions in default.
+	DefaultTrimChars = string([]byte{
+		'\t', // Tab.
+		'\v', // Vertical tab.
+		'\n', // New line (line feed).
+		'\r', // Carriage return.
+		'\f', // New page.
+		' ',  // Ordinary space.
+		0x00, // NUL-byte.
+		0x85, // Delete.
+		0xA0, // Non-breaking space.
+	})
+)
+
 // Reverse 反转字符串
 func Reverse(s string) string {
 	r := []rune(s)
@@ -107,21 +122,23 @@ func RegexpReplace(src, expr, repl string) (string, error) {
 }
 
 // TrimSpace 去除字符串前后空格、换行等
-func TrimSpace(s string) string {
-	s = strings.TrimSpace(s)
-	s = strings.Trim(s, "\r")
-	s = strings.Trim(s, "\n")
-	s = strings.Trim(s, "\t")
-	return s
+func TrimSpace(s string, characterMask ...string) string {
+	trimChars := DefaultTrimChars
+	if len(characterMask) > 0 {
+		trimChars += characterMask[0]
+	}
+	return strings.Trim(s, trimChars)
 }
 
 // ReplaceSpace 去除字符串全部空格、换行等
-func ReplaceSpace(s string) string {
-	s = strings.ReplaceAll(s, " ", "")
-	s = strings.ReplaceAll(s, "\t", "")
-	s = strings.ReplaceAll(s, "\n", "")
-	s = strings.ReplaceAll(s, "\r", "")
-	s = strings.TrimSpace(s)
+func ReplaceSpace(s string, characterMask ...string) string {
+	trimChars := DefaultTrimChars
+	if len(characterMask) > 0 {
+		trimChars += characterMask[0]
+	}
+	for _, v := range trimChars {
+		s = strings.ReplaceAll(s, string(v), "")
+	}
 	return s
 }
 
