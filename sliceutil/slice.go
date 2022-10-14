@@ -218,3 +218,35 @@ func DifferenceInterface(slice1, slice2 []interface{}) []interface{} {
 	}
 	return n
 }
+
+// Unshift 头插 返回新切片元素个数
+func Unshift(s string, ss *[]string) int {
+	*ss = append([]string{s}, *ss...)
+	return len(*ss)
+}
+
+// Push 尾插 返回新切片元素个数
+func Push(s string, ss *[]string) int {
+	*ss = append(*ss, s)
+	return len(*ss)
+}
+
+// Shift 头出
+func Shift(ss *[]string) (string, bool) {
+	if len(*ss) == 0 {
+		return "", false
+	}
+	first := (*ss)[0]
+	*ss = (*ss)[1:]
+	return first, true
+}
+
+//Pop 尾出
+func Pop(ss *[]string) (string, bool) {
+	if len(*ss) == 0 {
+		return "", false
+	}
+	last := (*ss)[len(*ss)-1]
+	*ss = (*ss)[0 : len(*ss)-1]
+	return last, true
+}

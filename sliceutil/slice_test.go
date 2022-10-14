@@ -92,3 +92,33 @@ func TestDifferenceInterface(t *testing.T) {
 	res := DifferenceInterface([]interface{}{1, "2", 4}, []interface{}{1, 2, 3, 4})
 	assert.Equalf(t, []interface{}{"2"}, res, "FAIL")
 }
+
+func TestUnshift(t *testing.T) {
+	ss := []string{"a", "b", "c", "d"}
+	length := Unshift("x", &ss)
+	assert.Equalf(t, []string{"x", "a", "b", "c", "d"}, ss, "FAIL")
+	assert.Equalf(t, 5, length, "FAIL")
+}
+
+func TestPush(t *testing.T) {
+	ss := []string{"a", "b", "c", "d"}
+	length := Push("x", &ss)
+	assert.Equalf(t, []string{"a", "b", "c", "d", "x"}, ss, "FAIL")
+	assert.Equalf(t, 5, length, "FAIL")
+}
+
+func TestShift(t *testing.T) {
+	ss := []string{"a", "b", "c", "d"}
+	res, ok := Shift(&ss)
+	assert.Equalf(t, []string{"b", "c", "d"}, ss, "FAIL")
+	assert.Equalf(t, "a", res, "FAIL")
+	assert.Equalf(t, true, ok, "FAIL")
+}
+
+func TestPop(t *testing.T) {
+	ss := []string{"a", "b", "c", "d"}
+	res, ok := Pop(&ss)
+	assert.Equalf(t, []string{"a", "b", "c"}, ss, "FAIL")
+	assert.Equalf(t, "d", res, "FAIL")
+	assert.Equalf(t, true, ok, "FAIL")
+}
