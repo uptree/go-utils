@@ -2,8 +2,9 @@ package encrypt
 
 import (
 	"encoding/base64"
-	"github.com/uptree/go-utils/assert"
 	"testing"
+
+	"github.com/uptree/go-utils/assert"
 )
 
 func TestDesEbcPkcs5EncryptBase64(t *testing.T) {
@@ -21,15 +22,15 @@ func TestDesEbcPkcs5DecryptBase64(t *testing.T) {
 }
 
 func TestDesEdeEcbEncrypt(t *testing.T) {
-	key := []byte("bc4b2a76b9719d91")
+	key := []byte("12345678bc4b2a76b9719d91")
 	ciphertext, _ := DesEdeEcbEncrypt([]byte("hello"), key)
 	base64Ciphertext := base64.StdEncoding.EncodeToString(ciphertext)
-	assert.Equalf(t, "nIyAIyI3PQY=", base64Ciphertext, "FAIL")
+	assert.Equalf(t, "Qa6CzunG4x4=", base64Ciphertext, "FAIL")
 }
 
 func TestDesEdeEcbDecrypt(t *testing.T) {
-	key := []byte("bc4b2a76b9719d91")
-	ciphertext, _ := base64.StdEncoding.DecodeString("nIyAIyI3PQY=")
+	key := []byte("12345678bc4b2a76b9719d91")
+	ciphertext, _ := base64.StdEncoding.DecodeString("Qa6CzunG4x4=")
 	plaintext, _ := DesEdeEcbDecrypt(ciphertext, key)
 	assert.Equalf(t, "hello", string(plaintext), "FAIL")
 }

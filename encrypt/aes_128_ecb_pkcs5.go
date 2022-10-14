@@ -1,4 +1,5 @@
 // MySQL中默认的aes加密算法是aes-128-ecb
+// key长度应该为16位
 
 package encrypt
 
