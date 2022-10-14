@@ -12,8 +12,8 @@ import (
 	"encoding/base64"
 )
 
-// AesECBEncrypt256 加密
-func AesECBEncrypt256(plaintext, key []byte) ([]byte, error) {
+// Aes256EcbPkcs7Encrypt 加密
+func Aes256EcbPkcs7Encrypt(plaintext, key []byte) ([]byte, error) {
 	c, err := aes.NewCipher(PasswdPadding32(key))
 	if err != nil {
 		return nil, err
@@ -26,8 +26,8 @@ func AesECBEncrypt256(plaintext, key []byte) ([]byte, error) {
 	return ciphertext, nil
 }
 
-// AesECBDecrypt256 解密
-func AesECBDecrypt256(ciphertext, key []byte) ([]byte, error) {
+// Aes256EcbPkcs7Decrypt 解密
+func Aes256EcbPkcs7Decrypt(ciphertext, key []byte) ([]byte, error) {
 	c, err := aes.NewCipher(PasswdPadding32(key))
 	if err != nil {
 		return nil, err
@@ -39,22 +39,22 @@ func AesECBDecrypt256(ciphertext, key []byte) ([]byte, error) {
 	return PKCS7UnPadding(plaintext, aes.BlockSize)
 }
 
-// AesECBEncrypt256Msg 加密+base64编码
-func AesECBEncrypt256Msg(msg, key string) (string, error) {
-	encrypted, err := AesECBEncrypt256([]byte(msg), []byte(key))
+// Aes256EcbPkcs7EncryptBase64 加密+base64编码
+func Aes256EcbPkcs7EncryptBase64(msg, key string) (string, error) {
+	encrypted, err := Aes256EcbPkcs7Encrypt([]byte(msg), []byte(key))
 	if encrypted == nil {
 		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(encrypted), nil
 }
 
-// AesECBDecrypt256Msg 解密+base64编码
-func AesECBDecrypt256Msg(msg, key string) (string, error) {
+// Aes256EcbPkcs7DecryptBase64 解密+base64编码
+func Aes256EcbPkcs7DecryptBase64(msg, key string) (string, error) {
 	encrypted, err := base64.StdEncoding.DecodeString(msg)
 	if err != nil {
 		return "", err
 	}
-	decrypted, err := AesECBDecrypt256(encrypted, []byte(key))
+	decrypted, err := Aes256EcbPkcs7Decrypt(encrypted, []byte(key))
 	if err != nil {
 		return "", err
 	}

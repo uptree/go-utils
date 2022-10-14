@@ -10,8 +10,8 @@ import (
 	"errors"
 )
 
-//DesEBCEncrypt 加密
-func DesEBCEncrypt(plaintext, key []byte) ([]byte, error) {
+//DesEbcEncrypt 加密
+func DesEbcEncrypt(plaintext, key []byte) ([]byte, error) {
 	block, err := des.NewCipher(PasswdPadding8(key))
 	if err != nil {
 		return nil, err
@@ -30,8 +30,8 @@ func DesEBCEncrypt(plaintext, key []byte) ([]byte, error) {
 	return ciphertext, nil
 }
 
-//DesEBCDecrypt 解密
-func DesEBCDecrypt(ciphertext, key []byte) ([]byte, error) {
+//DesEbcDecrypt 解密
+func DesEbcDecrypt(ciphertext, key []byte) ([]byte, error) {
 	block, err := des.NewCipher(PasswdPadding8(key))
 	if err != nil {
 		return nil, err
@@ -50,32 +50,32 @@ func DesEBCDecrypt(ciphertext, key []byte) ([]byte, error) {
 	return plaintext, nil
 }
 
-// DesEBCEncryptMsg 加密+Base64 兼容java默认
-func DesEBCEncryptMsg(msg, key string) (string, error) {
+// DesEbcPkcs5EncryptBase64 加密+Base64 兼容java默认
+func DesEbcPkcs5EncryptBase64(msg, key string) (string, error) {
 
 	data := PKCS5Padding([]byte(msg), 8)
-	encrypted, err := DesEBCEncrypt(data, []byte(key))
+	encrypted, err := DesEbcEncrypt(data, []byte(key))
 	if err != nil {
 		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(encrypted), nil
 }
 
-// DesEBCDecryptMsg 解密+Base64 兼容java默认
-func DesEBCDecryptMsg(msg, key string) (string, error) {
+// DesEbcPkcs5DecryptBase64 解密+Base64 兼容java默认
+func DesEbcPkcs5DecryptBase64(msg, key string) (string, error) {
 	encrypted, err := base64.StdEncoding.DecodeString(msg)
 	if err != nil {
 		return "", err
 	}
-	decrypted, err := DesEBCDecrypt(encrypted, []byte(key))
+	decrypted, err := DesEbcDecrypt(encrypted, []byte(key))
 	if err != nil {
 		return "", err
 	}
 	return string(PKCS5UnPadding(decrypted)), nil
 }
 
-// DESedeECBEncrypt 3DES加密desede-ECB
-func DESedeECBEncrypt(plaintext, key []byte) ([]byte, error) {
+// DesEdeEcbEncrypt 3DES加密desede-ECB
+func DesEdeEcbEncrypt(plaintext, key []byte) ([]byte, error) {
 	desKey := make([]byte, 24, 24)
 	copy(desKey, PasswdPadding24(key))
 	k1 := desKey[:8]
@@ -83,40 +83,39 @@ func DESedeECBEncrypt(plaintext, key []byte) ([]byte, error) {
 	k3 := desKey[16:]
 	plaintext = PKCS7Padding(plaintext, 8)
 
-	buf1, err := DesEBCEncrypt(plaintext, k1)
+	buf1, err := DesEbcEncrypt(plaintext, k1)
 	if err != nil {
 		return nil, err
 	}
-	buf2, err := DesEBCDecrypt(buf1, k2)
+	buf2, err := DesEbcDecrypt(buf1, k2)
 	if err != nil {
 		return nil, err
 	}
-	ciphertext, err := DesEBCEncrypt(buf2, k3)
+	ciphertext, err := DesEbcEncrypt(buf2, k3)
 	if err != nil {
 		return nil, err
 	}
 	return ciphertext, nil
 }
 
-// DESedeECBDecrypt 3DES解密desede-ECB
-func DESedeECBDecrypt(src, key []byte) ([]byte, error) {
+// DesEdeEcbDecrypt 3DES解密desede-ECB
+func DesEdeEcbDecrypt(src, key []byte) ([]byte, error) {
 	tkey := make([]byte, 24, 24)
 	copy(tkey, key)
 	k1 := tkey[:8]
 	k2 := tkey[8:16]
 	k3 := tkey[16:]
-	buf1, err := DesEBCDecrypt(src, k3)
+	buf1, err := DesEbcDecrypt(src, k3)
 	if err != nil {
 		return nil, err
 	}
-	buf2, err := DesEBCEncrypt(buf1, k2)
+	buf2, err := DesEbcEncrypt(buf1, k2)
 	if err != nil {
 		return nil, err
 	}
-	out, err := DesEBCDecrypt(buf2, k1)
+	out, err := DesEbcDecrypt(buf2, k1)
 	if err != nil {
 		return nil, err
 	}
 	return PKCS7UnPadding(out, 8)
 }
-

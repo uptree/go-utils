@@ -53,12 +53,14 @@ func PKCS7UnPadding(plaintext []byte, blockSize int) ([]byte, error) {
 	return plaintext[:plaintextLen-paddingLen], nil
 }
 
+// ZeroPadding 填充
 func ZeroPadding(plaintext []byte, blockSize int) []byte {
 	padding := blockSize - len(plaintext)%blockSize
 	padText := bytes.Repeat([]byte{0}, padding) //用0去填充
 	return append(plaintext, padText...)
 }
 
+// ZeroUnPadding 去除
 func ZeroUnPadding(plaintext []byte) []byte {
 	return bytes.TrimFunc(plaintext,
 		func(r rune) bool {

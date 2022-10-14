@@ -6,8 +6,8 @@ import (
 	"encoding/base64"
 )
 
-// AesEncrypt AES加密
-func AesEncrypt(plaintext, key []byte) ([]byte, error) {
+// AesCbcPkcs5Encrypt AES加密
+func AesCbcPkcs5Encrypt(plaintext, key []byte) ([]byte, error) {
 	block, err := aes.NewCipher(PasswdPadding16(key))
 	if err != nil {
 		return nil, err
@@ -22,8 +22,8 @@ func AesEncrypt(plaintext, key []byte) ([]byte, error) {
 	return cipherText, nil
 }
 
-// AesDecrypt AES解密
-func AesDecrypt(ciphertext, key []byte) ([]byte, error) {
+// AesCbcPkcs5Decrypt AES解密
+func AesCbcPkcs5Decrypt(ciphertext, key []byte) ([]byte, error) {
 	block, err := aes.NewCipher(PasswdPadding16(key))
 	if err != nil {
 		return nil, err
@@ -37,22 +37,22 @@ func AesDecrypt(ciphertext, key []byte) ([]byte, error) {
 	return PKCS5UnPadding(plainText), nil
 }
 
-// AesEncryptMsg 加密+base64编码
-func AesEncryptMsg(plaintext, key string) (string, error) {
-	ciphertext, err := AesEncrypt([]byte(plaintext), []byte(key))
+// AesCbcPkcs5EncryptBase64 加密+base64编码
+func AesCbcPkcs5EncryptBase64(plaintext, key string) (string, error) {
+	ciphertext, err := AesCbcPkcs5Encrypt([]byte(plaintext), []byte(key))
 	if err != nil {
 		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(ciphertext), nil
 }
 
-// AesDecryptMsg 解密+base64编码
-func AesDecryptMsg(ciphertext, key string) (string, error) {
+// AesCbcPkcs5DecryptBase64 解密+base64编码
+func AesCbcPkcs5DecryptBase64(ciphertext, key string) (string, error) {
 	cipherBytes, err := base64.StdEncoding.DecodeString(ciphertext)
 	if err != nil {
 		return "", err
 	}
-	plaintext, err := AesDecrypt(cipherBytes, []byte(key))
+	plaintext, err := AesCbcPkcs5Decrypt(cipherBytes, []byte(key))
 	if err != nil {
 		return "", err
 	}

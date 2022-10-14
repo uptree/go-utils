@@ -16,8 +16,8 @@ import (
 	"strings"
 )
 
-// AesCBCEncrypt 加密
-func AesCBCEncrypt(msg, encodingAesKey string) ([]byte, error) {
+// AesCbcPkcs7Encrypt 加密
+func AesCbcPkcs7Encrypt(msg, encodingAesKey string) ([]byte, error) {
 	aesKey, err := base64.StdEncoding.DecodeString(encodingAesKey + "=")
 	if nil != err {
 		return nil, err
@@ -40,8 +40,8 @@ func AesCBCEncrypt(msg, encodingAesKey string) ([]byte, error) {
 	return base64Msg, nil
 }
 
-// AesCBCDecrypt 解密
-func AesCBCDecrypt(base64EncryptMsg, encodingAesKey string) ([]byte, error) {
+// AesCbcPkcs7Decrypt 解密
+func AesCbcPkcs7Decrypt(base64EncryptMsg, encodingAesKey string) ([]byte, error) {
 	aesKey, err := base64.StdEncoding.DecodeString(encodingAesKey + "=")
 	if nil != err {
 		return nil, err
@@ -68,18 +68,18 @@ func AesCBCDecrypt(base64EncryptMsg, encodingAesKey string) ([]byte, error) {
 	return encryptMsg, err
 }
 
-// AesCBCEncryptMsg 加密
-func AesCBCEncryptMsg(msg, encodingAesKey string) (string, error) {
-	bs, err := AesCBCEncrypt(msg, encodingAesKey)
+// AesCbcPkcs7EncryptBase64 加密
+func AesCbcPkcs7EncryptBase64(msg, encodingAesKey string) (string, error) {
+	bs, err := AesCbcPkcs7Encrypt(msg, encodingAesKey)
 	if err != nil {
 		return msg, err
 	}
 	return string(bs), err
 }
 
-// AesCBCDecryptMsg 解密
-func AesCBCDecryptMsg(base64EncryptMsg, encodingAesKey string) (string, error) {
-	bs, err := AesCBCDecrypt(base64EncryptMsg, encodingAesKey)
+// AesCbcPkcs7DecryptBase64 解密
+func AesCbcPkcs7DecryptBase64(base64EncryptMsg, encodingAesKey string) (string, error) {
+	bs, err := AesCbcPkcs7Decrypt(base64EncryptMsg, encodingAesKey)
 	if err != nil {
 		return base64EncryptMsg, err
 	}

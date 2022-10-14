@@ -6,30 +6,30 @@ import (
 	"testing"
 )
 
-func TestDesEBCEncryptMsg(t *testing.T) {
+func TestDesEbcPkcs5EncryptBase64(t *testing.T) {
 	key := "12345678"
-	encrypted, err := DesEBCEncryptMsg("hello", key)
+	encrypted, err := DesEbcPkcs5EncryptBase64("hello", key)
 	assert.Equalf(t, "uhbGoCVxJa8=", encrypted, "FAIL")
 	assert.Nil(t, err, "FAIL")
 }
 
-func TestDesEBCDecryptMsg(t *testing.T) {
+func TestDesEbcPkcs5DecryptBase64(t *testing.T) {
 	key := "12345678"
-	decrypted, err := DesEBCDecryptMsg("uhbGoCVxJa8=", key)
+	decrypted, err := DesEbcPkcs5DecryptBase64("uhbGoCVxJa8=", key)
 	assert.Equalf(t, "hello", decrypted, "FAIL")
 	assert.Nil(t, err, "FAIL")
 }
 
-func TestDESedeECBEncrypt(t *testing.T) {
+func TestDesEdeEcbEncrypt(t *testing.T) {
 	key := []byte("bc4b2a76b9719d91")
-	ciphertext, _ := DESedeECBEncrypt([]byte("hello"), key)
+	ciphertext, _ := DesEdeEcbEncrypt([]byte("hello"), key)
 	base64Ciphertext := base64.StdEncoding.EncodeToString(ciphertext)
 	assert.Equalf(t, "nIyAIyI3PQY=", base64Ciphertext, "FAIL")
 }
 
-func TestDESedeECBDecrypt(t *testing.T) {
+func TestDesEdeEcbDecrypt(t *testing.T) {
 	key := []byte("bc4b2a76b9719d91")
 	ciphertext, _ := base64.StdEncoding.DecodeString("nIyAIyI3PQY=")
-	plaintext, _ := DESedeECBDecrypt(ciphertext, key)
+	plaintext, _ := DesEdeEcbDecrypt(ciphertext, key)
 	assert.Equalf(t, "hello", string(plaintext), "FAIL")
 }
