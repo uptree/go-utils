@@ -13,9 +13,10 @@ var (
 )
 
 const (
-	CharUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	CharLowerCase = "abcdefghijklmnopqrstuvwxyz"
-	CharNumber    = "0123456789"
+	CharUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"         // 26
+	CharLowerCase = "abcdefghijklmnopqrstuvwxyz"         // 26
+	CharNumber    = "0123456789"                         // 10
+	CharSymbol    = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" // 32
 )
 
 // GetRandomInt 生成值小于max的随机数
