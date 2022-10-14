@@ -110,8 +110,8 @@ func Crc32(b []byte) uint32 {
 	return crc32.ChecksumIEEE(b)
 }
 
-// Crc64 ...
+// Crc64 ... 可用于腾讯云/阿里云对象存储校验
 func Crc64(b []byte) uint64 {
-	tab := crc64.MakeTable(crc64.ISO)
+	tab := crc64.MakeTable(crc64.ECMA)
 	return crc64.Checksum(b, tab)
 }
