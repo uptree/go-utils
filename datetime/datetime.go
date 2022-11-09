@@ -2,8 +2,11 @@ package datetime
 
 import "time"
 
-const DefaultLayout string = "2006-01-02 15:04:05"
-const DayLayout string = "2006-01-02"
+const (
+	DefaultLayout  = "2006-01-02 15:04:05"
+	DayLayout      = "2006-01-02"
+	YYYYMMDDLayout = "20060102"
+)
 
 // Time 获取当前时间戳
 func Time() int64 {
