@@ -20,6 +20,10 @@ func TestIntToString(t *testing.T) {
 	assert.Equalf(t, "-12345678", IntToString(-12345678), "FAIL")
 }
 
+func TestInt64ToString(t *testing.T) {
+	assert.Equalf(t, "12345678", Int64ToString(int64(12345678)), "FAIL")
+}
+
 func TestUint64ToString(t *testing.T) {
 	assert.Equalf(t, "12345678", Uint64ToString(uint64(12345678)), "FAIL")
 }

@@ -17,13 +17,13 @@ func AnyToString(i interface{}) string {
 	case int:
 		s = strconv.Itoa(v)
 	case int8:
-		s = strconv.Itoa(int(v))
+		s = strconv.FormatInt(int64(v), 10)
 	case int16:
-		s = strconv.Itoa(int(v))
+		s = strconv.FormatInt(int64(v), 10)
 	case int32: // same as `rune`
-		s = strconv.Itoa(int(v))
+		s = strconv.FormatInt(int64(v), 10)
 	case int64:
-		s = strconv.Itoa(int(v))
+		s = strconv.FormatInt(v, 10)
 	case uint:
 		s = strconv.FormatUint(uint64(v), 10)
 	case uint8:
@@ -57,6 +57,11 @@ func AnyToString(i interface{}) string {
 // IntToString int => string
 func IntToString(i int) string {
 	return strconv.Itoa(i)
+}
+
+// Int64ToString int64 => string
+func Int64ToString(i int64) string {
+	return strconv.FormatInt(i, 10)
 }
 
 // Uint64ToString uint64 => string
