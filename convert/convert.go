@@ -174,3 +174,12 @@ func IntToBool(i int) bool {
 	}
 	return false
 }
+
+// ToJson ...
+func ToJson(v interface{}) string {
+	b, e := json.Marshal(v)
+	if e != nil {
+		return ""
+	}
+	return string(b)
+}

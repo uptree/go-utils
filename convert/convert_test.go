@@ -107,3 +107,14 @@ func TestIntToBool(t *testing.T) {
 	assert.Equalf(t, true, IntToBool(1), "FAIL")
 	assert.Equalf(t, false, IntToBool(0), "FAIL")
 }
+
+func TestToJson(t *testing.T) {
+	msg := struct {
+		Id      int32
+		Content string
+	}{
+		Id:      1,
+		Content: "hello",
+	}
+	assert.Equalf(t, "{\"Id\":1,\"Content\":\"hello\"}", ToJson(msg), "FAIL")
+}
