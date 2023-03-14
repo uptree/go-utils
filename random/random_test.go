@@ -34,3 +34,9 @@ func TestGetRandomInVisible(t *testing.T) {
 	s := GetRandomInVisible(1)
 	t.Logf("GetRandomInVisible: %d", len(s))
 }
+
+func TestShuffleSlice(t *testing.T) {
+	ss := []interface{}{"a", "b", "c", "d", "e", "f", "g", "h", "i"}
+	ShuffleSlice(ss)
+	t.Logf("ShuffleSlice: %v", ss)
+}

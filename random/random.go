@@ -96,3 +96,12 @@ func getRandSeek() int64 {
 	l.Unlock()
 	return time.Now().UnixNano() + randSeek
 }
+
+// ShuffleSlice 打乱顺序
+func ShuffleSlice(ss []interface{}) {
+	rand.Seed(getRandSeek())
+	rand.Shuffle(len(ss), func(i, j int) {
+		ss[i], ss[j] = ss[j], ss[i]
+	})
+	return
+}
