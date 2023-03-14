@@ -26,19 +26,19 @@ func TestRawQueryToMap(t *testing.T) {
 	assert.Equalf(t, params, RawQueryToMap(query), "FAIL")
 }
 
-func TestRawUrlGetScheme(t *testing.T) {
-	assert.Equalf(t, "https", RawUrlGetScheme("https://localhost:8080/index"), "FAIL")
-	assert.Equalf(t, "http", RawUrlGetScheme("Http://localhost:8080/index"), "FAIL")
-	assert.Equalf(t, "scheme", RawUrlGetScheme("Scheme://localhost:8080/index"), "FAIL")
-	assert.Emptyf(t, RawUrlGetScheme("//localhost:8080/index"), "FAIL")
-	assert.Emptyf(t, RawUrlGetScheme("://localhost:8080/index"), "FAIL")
+func TestRawURLGetScheme(t *testing.T) {
+	assert.Equalf(t, "https", RawURLGetScheme("https://localhost:8080/index"), "FAIL")
+	assert.Equalf(t, "http", RawURLGetScheme("Http://localhost:8080/index"), "FAIL")
+	assert.Equalf(t, "scheme", RawURLGetScheme("Scheme://localhost:8080/index"), "FAIL")
+	assert.Emptyf(t, RawURLGetScheme("//localhost:8080/index"), "FAIL")
+	assert.Emptyf(t, RawURLGetScheme("://localhost:8080/index"), "FAIL")
 }
 
-func TestRawUrlGetHost(t *testing.T) {
+func TestRawURLGetHost(t *testing.T) {
 	assert.Equalf(t,
-		"localhost:8080", RawUrlGetHost("https://localhost:8080/index?b=1&a=2"), "FAIL")
+		"localhost:8080", RawURLGetHost("https://localhost:8080/index?b=1&a=2"), "FAIL")
 	assert.Equalf(t,
-		"localhost:8080", RawUrlGetHost("xx://localhost:8080/index?b=1&a=2"), "FAIL")
+		"localhost:8080", RawURLGetHost("xx://localhost:8080/index?b=1&a=2"), "FAIL")
 }
 
 func TestRawURLGetParams(t *testing.T) {
@@ -79,4 +79,17 @@ func TestRawURLToHttps(t *testing.T) {
 	rawURL := "http://localhost//index?b=1&a=2"
 	newURL := "https://localhost//index?b=1&a=2"
 	assert.Equalf(t, newURL, RawURLToHttps(rawURL), "FAIL")
+}
+
+func TestTrimScheme(t *testing.T) {
+	assert.Equalf(t, "localhost//index?b=1&a=2",
+		TrimScheme("http://localhost//index?b=1&a=2"), "FAIL")
+	assert.Equalf(t, "localhost//index?b=1&a=2",
+		TrimScheme("https://localhost//index?b=1&a=2"), "FAIL")
+	assert.Equalf(t, "localhost//index?b=1&a=2",
+		TrimScheme("//localhost//index?b=1&a=2"), "FAIL")
+	assert.Equalf(t, "localhost//index?b=1&a=2",
+		TrimScheme("/localhost//index?b=1&a=2"), "FAIL")
+	assert.Equalf(t, ":/localhost//index?b=1&a=2",
+		TrimScheme(":/localhost//index?b=1&a=2"), "FAIL")
 }

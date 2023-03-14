@@ -32,8 +32,8 @@ func RawQueryToMap(rawQuery string) map[string]string {
 	return params
 }
 
-// RawUrlGetHost 获取URL的域名+端口
-func RawUrlGetHost(rawURL string) string {
+// RawURLGetHost 获取URL的域名+端口
+func RawURLGetHost(rawURL string) string {
 	u, err := url.Parse(rawURL)
 	if err != nil {
 		return ""
@@ -41,8 +41,8 @@ func RawUrlGetHost(rawURL string) string {
 	return u.Host
 }
 
-// RawUrlGetScheme 获取URL的协议
-func RawUrlGetScheme(rawURL string) string {
+// RawURLGetScheme 获取URL的协议
+func RawURLGetScheme(rawURL string) string {
 	u, err := url.Parse(rawURL)
 	if err != nil {
 		return ""
@@ -111,4 +111,14 @@ func RawURLToHttps(rawURL string) string {
 		return "https:" + rawURL
 	}
 	return rawURL
+}
+
+// TrimScheme 过滤URL协议
+func TrimScheme(rawURL string) string {
+	u, err := url.Parse(rawURL)
+	if err != nil {
+		return rawURL
+	}
+	newUrl := strings.TrimPrefix(rawURL, u.Scheme)
+	return strings.TrimLeft(newUrl, ":/")
 }
