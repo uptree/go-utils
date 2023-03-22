@@ -84,11 +84,15 @@ func TestRawURLToHttps(t *testing.T) {
 func TestTrimScheme(t *testing.T) {
 	assert.Equalf(t, "localhost//index?b=1&a=2",
 		TrimScheme("http://localhost//index?b=1&a=2"), "FAIL")
+	assert.Equalf(t, "localhost:8001//index?b=1&a=2",
+		TrimScheme("cc://localhost:8001//index?b=1&a=2"), "FAIL")
+	assert.Equalf(t, "localhost//index?b=1&a=2",
+		TrimScheme("ftp://localhost//index?b=1&a=2"), "FAIL")
 	assert.Equalf(t, "localhost//index?b=1&a=2",
 		TrimScheme("https://localhost//index?b=1&a=2"), "FAIL")
 	assert.Equalf(t, "localhost//index?b=1&a=2",
 		TrimScheme("//localhost//index?b=1&a=2"), "FAIL")
-	assert.Equalf(t, "localhost//index?b=1&a=2",
+	assert.Equalf(t, "/localhost//index?b=1&a=2",
 		TrimScheme("/localhost//index?b=1&a=2"), "FAIL")
 	assert.Equalf(t, ":/localhost//index?b=1&a=2",
 		TrimScheme(":/localhost//index?b=1&a=2"), "FAIL")

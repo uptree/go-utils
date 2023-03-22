@@ -119,6 +119,5 @@ func TrimScheme(rawURL string) string {
 	if err != nil {
 		return rawURL
 	}
-	newUrl := strings.TrimPrefix(rawURL, u.Scheme)
-	return strings.TrimLeft(newUrl, ":/")
+	return u.Host + u.RequestURI()
 }
