@@ -241,7 +241,7 @@ func Shift(ss *[]string) (string, bool) {
 	return first, true
 }
 
-//Pop 尾出
+// Pop 尾出
 func Pop(ss *[]string) (string, bool) {
 	if len(*ss) == 0 {
 		return "", false
