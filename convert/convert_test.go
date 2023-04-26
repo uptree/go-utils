@@ -118,3 +118,25 @@ func TestToJson(t *testing.T) {
 	}
 	assert.Equalf(t, "{\"Id\":1,\"Content\":\"hello\"}", ToJson(msg), "FAIL")
 }
+
+func TestToJSONBytes(t *testing.T) {
+	msg := struct {
+		Id      int32
+		Content string
+	}{
+		Id:      1,
+		Content: "hello",
+	}
+	assert.Equalf(t, "{\"Id\":1,\"Content\":\"hello\"}", string(ToJSONBytes(msg)), "FAIL")
+}
+
+func TestToJSONRaw(t *testing.T) {
+	msg := struct {
+		Id      int32
+		Content string
+	}{
+		Id:      1,
+		Content: "hello",
+	}
+	assert.Equalf(t, "{\"Id\":1,\"Content\":\"hello\"}", string(ToJSONRaw(msg)), "FAIL")
+}

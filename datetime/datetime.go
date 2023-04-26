@@ -1,6 +1,9 @@
 package datetime
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 const (
 	DefaultLayout  = "2006-01-02 15:04:05"
@@ -80,7 +83,7 @@ func WeekStartTime(t time.Time) time.Time {
 	return tm2
 }
 
-//WeekEndTime Sunday => 23:59:59 获取周结束时间戳
+// WeekEndTime Sunday => 23:59:59 获取周结束时间戳
 func WeekEndTime(t time.Time) time.Time {
 	offset := 0
 	if w := t.Weekday(); w != 0 {
@@ -114,4 +117,12 @@ func YearStartTime(t time.Time) time.Time {
 func YearEndTime(t time.Time) time.Time {
 	tm2 := time.Date(t.Year(), time.December, 31, 23, 59, 59, 0, time.Local)
 	return tm2
+}
+
+// TimeDiff 时间差
+func TimeDiff(startTime, endTime time.Time) (time.Duration, error) {
+	if startTime.After(endTime) {
+		return 0, errors.New("end time is earlier than start time")
+	}
+	return endTime.Sub(startTime), nil
 }

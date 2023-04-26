@@ -69,3 +69,9 @@ func TestYearEndTime(t *testing.T) {
 	t.Logf("YearEndTime: %v", YearEndTime(time.Now()))
 }
 
+func TestTimeDiff(t *testing.T) {
+	diff, err := TimeDiff(YearStartTime(time.Now()), YearStartTime(time.Now()))
+	t.Logf("TimeDiff: %v,err:%v", diff, err)
+	diff, err = TimeDiff(time.Now(), time.Now())
+	t.Logf("TimeDiff: %v,err:%v", diff, err)
+}

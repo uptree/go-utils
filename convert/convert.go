@@ -183,3 +183,17 @@ func ToJson(v interface{}) string {
 	}
 	return string(b)
 }
+
+// ToJSONBytes ...
+func ToJSONBytes(v interface{}) []byte {
+	b, e := json.Marshal(v)
+	if e != nil {
+		return nil
+	}
+	return b
+}
+
+// ToJSONRaw ...
+func ToJSONRaw(v interface{}) json.RawMessage {
+	return ToJSONBytes(v)
+}
