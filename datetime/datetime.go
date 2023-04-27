@@ -26,6 +26,21 @@ func MicroTime() int64 {
 	return time.Now().UnixNano() / 1e3
 }
 
+// Datetime 获取当前时间
+func Datetime() string {
+	return Date(Time(), DefaultLayout)
+}
+
+// Today 获取今天日期
+func Today() string {
+	return Date(Time(), DayLayout)
+}
+
+// ToTime 时间戳转时间
+func ToTime(timestamp int64) time.Time {
+	return time.Unix(timestamp, 0)
+}
+
 // Date 时间戳格式化
 func Date(timestamp int64, layout string) string {
 	return time.Unix(timestamp, 0).Format(layout)
@@ -38,16 +53,6 @@ func Timestamp(datetime string, layout string) int64 {
 		return 0
 	}
 	return tm2.Unix()
-}
-
-// Datetime 获取当前时间
-func Datetime() string {
-	return Date(Time(), DefaultLayout)
-}
-
-// Today 获取今天日期
-func Today() string {
-	return Date(Time(), DayLayout)
 }
 
 // TodayStartTime Today => 00:00:00 获取今天起始时间戳
