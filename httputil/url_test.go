@@ -7,7 +7,7 @@ import (
 )
 
 func TestMapToRawQuery(t *testing.T) {
-	params := make(map[string]string)
+	params := make(map[string]interface{})
 	params["Appid"] = "10001"
 	params["Version"] = "20220914"
 	params["Timestamp"] = "1663144810"
@@ -17,7 +17,7 @@ func TestMapToRawQuery(t *testing.T) {
 }
 
 func TestRawQueryToMap(t *testing.T) {
-	params := make(map[string]string)
+	params := make(map[string]interface{})
 	params["Appid"] = "10001"
 	params["Version"] = "20220914"
 	params["Timestamp"] = "1663144810"

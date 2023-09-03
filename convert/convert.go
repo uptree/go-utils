@@ -197,3 +197,16 @@ func ToJSONBytes(v interface{}) []byte {
 func ToJSONRaw(v interface{}) json.RawMessage {
 	return ToJSONBytes(v)
 }
+
+// CopyProperties 属性拷贝
+func CopyProperties(source interface{}, target interface{}) error {
+	bytes, err := json.Marshal(source)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(bytes, target)
+	if err != nil {
+		return err
+	}
+	return nil
+}

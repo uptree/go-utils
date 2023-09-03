@@ -140,3 +140,29 @@ func TestToJSONRaw(t *testing.T) {
 	}
 	assert.Equalf(t, "{\"Id\":1,\"Content\":\"hello\"}", string(ToJSONRaw(msg)), "FAIL")
 }
+
+func TestCopyProperties(t *testing.T) {
+	msg := struct {
+		Id      int32
+		Content string
+	}{
+		Id:      1,
+		Content: "hello",
+	}
+
+	type Msg struct {
+		Id      int32
+		Content string
+		Title   string
+	}
+	var x = struct {
+		Id      int32
+		Content string
+		Title   string
+	}{
+		Title: "title",
+	}
+	err := CopyProperties(msg, &x)
+	assert.Equalf(t, nil, err, "FAIL")
+	assert.Equalf(t, "hello", x.Content, "FAIL")
+}

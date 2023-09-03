@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"bytes"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path"
@@ -30,7 +29,7 @@ func CreateFile(filePath string) (*os.File, error) {
 
 // ReadFileToBytes 读文件
 func ReadFileToBytes(filePath string) ([]byte, error) {
-	b, err := ioutil.ReadFile(filePath)
+	b, err := os.ReadFile(filePath)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +59,7 @@ func ReadHttpFileToBytes(fileUrl string) ([]byte, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	return ioutil.ReadAll(resp.Body)
+	return io.ReadAll(resp.Body)
 }
 
 // Copy 复制文件

@@ -3,27 +3,39 @@ package httputil
 import (
 	"net/url"
 	"strings"
+
+	"github.com/uptree/go-utils/convert"
+)
+
+// Scheme 传输协议
+type Scheme string
+
+const (
+	// HTTP 表示HTTP明文传输协议
+	HTTP Scheme = "http"
+	// HTTPS 表示HTTPS加密传输协议
+	HTTPS Scheme = "https"
 )
 
 // MapToRawQuery Map => Raw Query  字典序
-func MapToRawQuery(params map[string]string) string {
+func MapToRawQuery(params map[string]interface{}) string {
 	queries := url.Values{}
 	for k, v := range params {
 		// 过滤空值
 		if v != "" {
-			queries.Add(k, v)
+			queries.Add(k, convert.AnyToString(v))
 		}
 	}
 	return queries.Encode()
 }
 
 // RawQueryToMap Raw Query => Map
-func RawQueryToMap(rawQuery string) map[string]string {
+func RawQueryToMap(rawQuery string) map[string]interface{} {
 	queries, err := url.ParseQuery(rawQuery)
 	if err != nil {
 		return nil
 	}
-	params := make(map[string]string)
+	params := make(map[string]interface{})
 	for k, v := range queries {
 		if len(v) > 0 {
 			params[k] = v[0] // 同名只取其一

@@ -3,6 +3,9 @@ package byteutil
 import (
 	"bytes"
 	"encoding/binary"
+	"image"
+	"image/jpeg"
+	"image/png"
 	"reflect"
 	"unsafe"
 )
@@ -52,4 +55,28 @@ func Split(buf []byte, limit int) [][]byte {
 // Join 数据合并
 func Join(s [][]byte) []byte {
 	return bytes.Join(s, []byte(""))
+}
+
+// JpegToBytes ...
+func JpegToBytes(img image.Image) ([]byte, error) {
+	buf := new(bytes.Buffer)
+	err := jpeg.Encode(buf, img, nil)
+	return buf.Bytes(), err
+}
+
+// BytesToJpeg ...
+func BytesToJpeg(buf []byte) (image.Image, error) {
+	return jpeg.Decode(bytes.NewReader(buf))
+}
+
+// PngToBytes ...
+func PngToBytes(img image.Image) ([]byte, error) {
+	buf := new(bytes.Buffer)
+	err := png.Encode(buf, img)
+	return buf.Bytes(), err
+}
+
+// BytesToPng ...
+func BytesToPng(buf []byte) (image.Image, error) {
+	return png.Decode(bytes.NewReader(buf))
 }
