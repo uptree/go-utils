@@ -1,6 +1,7 @@
 package sliceutil
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/uptree/go-utils/assert"
@@ -27,7 +28,8 @@ func TestExplode(t *testing.T) {
 }
 
 func TestUnique(t *testing.T) {
-	res := Unique([]string{"a", "c", "b", "c"})
+	res := Unique([]string{"a", "a", "c", "b", "c", "c", "a"})
+	fmt.Println(res)
 	assert.Equalf(t, 3, len(res), "FAIL")
 }
 

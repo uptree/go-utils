@@ -37,7 +37,7 @@ func Unique(ss []string) []string {
 	ns := make([]string, 0)
 	for _, s := range ss {
 		if InSlice(s, ns) {
-			break
+			continue
 		}
 		ns = append(ns, s)
 	}
