@@ -41,6 +41,15 @@ func ToTime(timestamp int64) time.Time {
 	return time.Unix(timestamp, 0)
 }
 
+// StringToTime 字符串转时间
+func StringToTime(datetime string, layout string) time.Time {
+	tm2, err := time.ParseInLocation(layout, datetime, time.Local)
+	if err != nil {
+		return time.Time{}
+	}
+	return tm2
+}
+
 // Date 时间戳格式化
 func Date(timestamp int64, layout string) string {
 	return time.Unix(timestamp, 0).Format(layout)

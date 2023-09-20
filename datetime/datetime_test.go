@@ -25,6 +25,11 @@ func TestToTime(t *testing.T) {
 	t.Logf("ToTime: %v", ToTime(Time()))
 }
 
+func TestStringToTime(t *testing.T) {
+	datetime := "wrong datetime"
+	t.Logf("StringToTime: %v", StringToTime(datetime, DefaultLayout))
+}
+
 func TestTimestamp(t *testing.T) {
 	datetime := "2021-06-06 11:11:11"
 	t.Logf("Date: %d", Timestamp(datetime, DefaultLayout))
