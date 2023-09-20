@@ -26,7 +26,6 @@ func TestValue(t *testing.T) {
 	assert.Equalf(t, "", Value(map[string]string{"k": "v"}, "v"), "FAIL")
 }
 
-
 func TestKeys(t *testing.T) {
 	assert.Equalf(t, []string{"k"}, Keys(map[string]string{"k": "v"}), "FAIL")
 }
@@ -43,4 +42,9 @@ func TestKeyToLower(t *testing.T) {
 func TestMerge(t *testing.T) {
 	assert.Equalf(t, map[string]string{"k": "v", "K": "v"},
 		Merge(map[string]string{"K": "v"}, map[string]string{"k": "v"}), "FAIL")
+}
+
+func TestToStringMap(t *testing.T) {
+	assert.Equalf(t, map[string]string{"K": "1", "k": "2"},
+		ToStringMap(map[string]interface{}{"K": 1, "k": "2"}), "FAIL")
 }

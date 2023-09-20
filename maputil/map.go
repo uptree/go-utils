@@ -1,6 +1,10 @@
 package maputil
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/uptree/go-utils/convert"
+)
 
 // IsEmpty ...
 func IsEmpty(mp map[string]string) bool {
@@ -65,6 +69,15 @@ func KeyToLower(mp map[string]string) map[string]string {
 func Merge(src, dst map[string]string) map[string]string {
 	for k, v := range src {
 		dst[k] = v
+	}
+	return dst
+}
+
+// ToStringMap convert map[string]interface{} to map[string]string
+func ToStringMap(src map[string]interface{}) map[string]string {
+	dst := make(map[string]string, len(src))
+	for k, v := range src {
+		dst[k] = convert.AnyToString(v)
 	}
 	return dst
 }
