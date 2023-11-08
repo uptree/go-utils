@@ -58,6 +58,17 @@ func TestHmacMd5Hex(t *testing.T) {
 	assert.Equalf(t, hex.EncodeToString(HmacMd5([]byte(s), []byte(key))), HmacMd5Hex(s, key), "FAIL")
 }
 
+func TestHmacSha1(t *testing.T) {
+	res := len(HmacSha1([]byte("text"), []byte("secret")))
+	assert.Equalf(t, 20, res, "FAIL")
+}
+
+func TestHmacSha1Hex(t *testing.T) {
+	s := "text"
+	key := "secret"
+	assert.Equalf(t, hex.EncodeToString(HmacSha1([]byte(s), []byte(key))), HmacSha1Hex(s, key), "FAIL")
+}
+
 func TestHmacSha256(t *testing.T) {
 	res := len(HmacSha256([]byte("text"), []byte("secret")))
 	assert.Equalf(t, 32, res, "FAIL")
