@@ -62,6 +62,7 @@ func AesCbcPkcs5DecryptBase64(ciphertext, key string) (string, error) {
 	return string(plaintext), nil
 }
 
+// AesCbcEncryptWithSalt 加盐加密
 func AesCbcEncryptWithSalt(plaintext, key []byte) ([]byte, error) {
 	plaintext = PKCS5Padding(plaintext, aes.BlockSize)
 	block, err := aes.NewCipher(key)
@@ -78,6 +79,7 @@ func AesCbcEncryptWithSalt(plaintext, key []byte) ([]byte, error) {
 	return ciphertext, nil
 }
 
+// AesCbcDecryptWithSalt 加盐解密
 func AesCbcDecryptWithSalt(ciphertext, key []byte) ([]byte, error) {
 	var block cipher.Block
 	block, err := aes.NewCipher(key)
@@ -85,12 +87,11 @@ func AesCbcDecryptWithSalt(ciphertext, key []byte) ([]byte, error) {
 		return nil, err
 	}
 	if len(ciphertext) < aes.BlockSize {
-		return nil, fmt.Errorf("iciphertext too short")
+		return nil, fmt.Errorf("ciphertext too short")
 	}
 	iv := ciphertext[:aes.BlockSize]
 	ciphertext = ciphertext[aes.BlockSize:]
 	cbc := cipher.NewCBCDecrypter(block, iv)
 	cbc.CryptBlocks(ciphertext, ciphertext)
-	ciphertext = PKCS5UnPadding(ciphertext)
-	return ciphertext, nil
+	return PKCS5UnPadding(ciphertext), nil
 }
