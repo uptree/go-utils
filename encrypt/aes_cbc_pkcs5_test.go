@@ -39,3 +39,11 @@ func TestAesCbcPkcs5DecryptBase64(t *testing.T) {
 	assert.Equalf(t, "hello", text, "FAIL")
 	assert.Nil(t, err)
 }
+
+func TestAesCbcEncryptWithSalt(t *testing.T) {
+	key := hashutil.Md5Hex("hello")[8:24]
+	ciphertext, err := AesCbcEncryptWithSalt([]byte("hello"), []byte(key))
+	text, err := AesCbcDecryptWithSalt(ciphertext, []byte(key))
+	assert.Equalf(t, "hello", string(text), "FAIL")
+	assert.Nil(t, err)
+}

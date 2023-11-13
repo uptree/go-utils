@@ -3,7 +3,10 @@ package encrypt
 import (
 	"crypto/aes"
 	"crypto/cipher"
+	"crypto/rand"
 	"encoding/base64"
+	"fmt"
+	"io"
 )
 
 // AesCbcPkcs5Encrypt AES加密
@@ -57,4 +60,37 @@ func AesCbcPkcs5DecryptBase64(ciphertext, key string) (string, error) {
 		return "", err
 	}
 	return string(plaintext), nil
+}
+
+func AesCbcEncryptWithSalt(plaintext, key []byte) ([]byte, error) {
+	plaintext = PKCS5Padding(plaintext, aes.BlockSize)
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return nil, err
+	}
+	ciphertext := make([]byte, aes.BlockSize+len(plaintext))
+	iv := ciphertext[0:aes.BlockSize]
+	if _, err = io.ReadFull(rand.Reader, iv); err != nil {
+		return nil, err
+	}
+	cbc := cipher.NewCBCEncrypter(block, iv)
+	cbc.CryptBlocks(ciphertext[aes.BlockSize:], plaintext)
+	return ciphertext, nil
+}
+
+func AesCbcDecryptWithSalt(ciphertext, key []byte) ([]byte, error) {
+	var block cipher.Block
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return nil, err
+	}
+	if len(ciphertext) < aes.BlockSize {
+		return nil, fmt.Errorf("iciphertext too short")
+	}
+	iv := ciphertext[:aes.BlockSize]
+	ciphertext = ciphertext[aes.BlockSize:]
+	cbc := cipher.NewCBCDecrypter(block, iv)
+	cbc.CryptBlocks(ciphertext, ciphertext)
+	ciphertext = PKCS5UnPadding(ciphertext)
+	return ciphertext, nil
 }
