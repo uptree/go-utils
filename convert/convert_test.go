@@ -98,6 +98,16 @@ func TestBase64Decode(t *testing.T) {
 	assert.Equalf(t, "hello", string(b), "FAIL")
 }
 
+func TestBase64UrlEncode(t *testing.T) {
+	s := "钟山风雨起苍黄百万雄师过大江"
+	r := Base64UrlEncode([]byte(s))
+	_, err := Base64Decode(r)
+	assert.Equalf(t, "6ZKf5bGx6aOO6Zuo6LW36IuN6buE55m-5LiH6ZuE5biI6L-H5aSn5rGf", r, "FAIL")
+	assert.NotEqualf(t, nil, err, "FAIL")
+	rr, err := Base64UrlDecode(r)
+	assert.Equalf(t, s, string(rr), "FAIL")
+}
+
 func TestBoolToInt(t *testing.T) {
 	assert.Equalf(t, 1, BoolToInt(true), "FAIL")
 	assert.Equalf(t, 0, BoolToInt(false), "FAIL")

@@ -159,6 +159,17 @@ func Base64Decode(src string) ([]byte, error) {
 	return base64.StdEncoding.DecodeString(src)
 }
 
+// Base64UrlEncode base64 url编码 + 和 / 替换成 - 和 " "
+func Base64UrlEncode(b []byte) string {
+	return base64.URLEncoding.EncodeToString(b)
+}
+
+// Base64UrlDecode base64 url解码
+func Base64UrlDecode(s string) ([]byte, error) {
+	ds, err := base64.URLEncoding.DecodeString(s)
+	return ds, err
+}
+
 // BoolToInt ...
 func BoolToInt(b bool) int {
 	if b {
