@@ -6,6 +6,7 @@ import (
 	"image"
 	"image/jpeg"
 	"image/png"
+	"io"
 	"reflect"
 	"unsafe"
 )
@@ -79,4 +80,21 @@ func PngToBytes(img image.Image) ([]byte, error) {
 // BytesToPng ...
 func BytesToPng(buf []byte) (image.Image, error) {
 	return png.Decode(bytes.NewReader(buf))
+}
+
+// IOReaderToBytes read contents from io.Reader
+func IOReaderToBytes(r io.Reader) ([]byte, error) {
+	var buf bytes.Buffer
+	_, err := io.Copy(&buf, r)
+	if err != nil {
+		if err != io.EOF {
+			return nil, err
+		}
+	}
+	return buf.Bytes(), nil
+}
+
+// BytesToIOReader bytes => io.Reader
+func BytesToIOReader(buf []byte) io.Reader {
+	return bytes.NewReader(buf)
 }

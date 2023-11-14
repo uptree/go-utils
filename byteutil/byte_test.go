@@ -116,3 +116,10 @@ func TestPngToBytes(t *testing.T) {
 		t.Log("Result: JpegToBytes Succeed")
 	}
 }
+
+func TestIOReaderToBytes(t *testing.T) {
+	b := []byte("hello")
+	r := BytesToIOReader(b)
+	bb, err := IOReaderToBytes(r)
+	t.Log(string(bb), err)
+}
