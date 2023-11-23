@@ -4,6 +4,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+	"encoding/base64"
 	"errors"
 	"io"
 )
@@ -40,4 +41,26 @@ func AesCfbDecryptWithSalt(ciphertext []byte, key []byte) ([]byte, error) {
 	cfb := cipher.NewCFBDecrypter(block, iv)
 	cfb.XORKeyStream(ciphertext, ciphertext)
 	return PKCS5UnPadding(ciphertext), nil
+}
+
+// AesCfbEncryptBase64 加密
+func AesCfbEncryptBase64(msg, encodingAesKey string) (string, error) {
+	ciphertext, err := AesCfbEncryptWithSalt([]byte(msg), []byte(encodingAesKey))
+	if err != nil {
+		return msg, err
+	}
+	return base64.StdEncoding.EncodeToString(ciphertext), err
+}
+
+// AesCfbDecryptBase64 解密
+func AesCfbDecryptBase64(base64EncryptMsg, encodingAesKey string) (string, error) {
+	encryptMsg, err := base64.StdEncoding.DecodeString(base64EncryptMsg)
+	if err != nil {
+		return "", err
+	}
+	bs, err := AesCfbDecryptWithSalt(encryptMsg, []byte(encodingAesKey))
+	if err != nil {
+		return "", err
+	}
+	return string(bs), err
 }
