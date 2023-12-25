@@ -1,7 +1,9 @@
 package sliceutil
 
 import (
+	"github.com/uptree/go-utils/check"
 	"strings"
+	"unicode/utf8"
 )
 
 // InSlice 判断字符串是否存在
@@ -249,4 +251,20 @@ func Pop(ss *[]string) (string, bool) {
 	last := (*ss)[len(*ss)-1]
 	*ss = (*ss)[0 : len(*ss)-1]
 	return last, true
+}
+
+func SplitByLen(s string, maxLen int) []string {
+	if check.HasHanChar(s) && maxLen < 3 {
+		return []string{}
+	}
+	var splits []string
+	var l, r int
+	for l, r = 0, maxLen; r < len(s); l, r = r, r+maxLen {
+		for !utf8.RuneStart(s[r]) {
+			r--
+		}
+		splits = append(splits, s[l:r])
+	}
+	splits = append(splits, s[l:])
+	return splits
 }

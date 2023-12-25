@@ -124,3 +124,10 @@ func TestPop(t *testing.T) {
 	assert.Equalf(t, "d", res, "FAIL")
 	assert.Equalf(t, true, ok, "FAIL")
 }
+
+func TestSplitByLen(t *testing.T) {
+	res := SplitByLen("a|b|c|d", 2)
+	assert.Equalf(t, []string{"a|", "b|", "c|", "d"}, res, "FAIL")
+	res = SplitByLen("钟山风雨起苍黄", 2)
+	assert.Equalf(t, []string{}, res, "FAIL")
+}
