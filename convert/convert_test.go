@@ -118,7 +118,7 @@ func TestIntToBool(t *testing.T) {
 	assert.Equalf(t, false, IntToBool(0), "FAIL")
 }
 
-func TestToJson(t *testing.T) {
+func TestToJSON(t *testing.T) {
 	msg := struct {
 		Id      int32
 		Content string
@@ -126,7 +126,7 @@ func TestToJson(t *testing.T) {
 		Id:      1,
 		Content: "hello",
 	}
-	assert.Equalf(t, "{\"Id\":1,\"Content\":\"hello\"}", ToJson(msg), "FAIL")
+	assert.Equalf(t, "{\"Id\":1,\"Content\":\"hello\"}", ToJSON(msg), "FAIL")
 }
 
 func TestToJSONBytes(t *testing.T) {

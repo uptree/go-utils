@@ -186,8 +186,8 @@ func IntToBool(i int) bool {
 	return false
 }
 
-// ToJson ...
-func ToJson(v interface{}) string {
+// ToJSON ...
+func ToJSON(v interface{}) string {
 	b, e := json.Marshal(v)
 	if e != nil {
 		return ""
