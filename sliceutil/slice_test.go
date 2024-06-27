@@ -131,3 +131,17 @@ func TestSplitByLen(t *testing.T) {
 	res = SplitByLen("钟山风雨起苍黄", 2)
 	assert.Equalf(t, []string{}, res, "FAIL")
 }
+
+func TestCompare(t *testing.T) {
+	slice1 := []string{"a", "b", "c", "d"}
+	slice2 := []string{"a", "b", "d", "e"}
+	diff1, diff2 := Compare(slice1, slice2)
+	d1 := Difference(slice1, slice2)
+	d2 := Difference(slice2, slice1)
+	r1, r2 := Compare(diff1, d1)
+	r3, r4 := Compare(diff2, d2)
+	assert.Equalf(t, []string{}, r1, "FAIL")
+	assert.Equalf(t, []string{}, r2, "FAIL")
+	assert.Equalf(t, []string{}, r3, "FAIL")
+	assert.Equalf(t, []string{}, r4, "FAIL")
+}

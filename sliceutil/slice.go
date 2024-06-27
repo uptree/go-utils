@@ -253,6 +253,7 @@ func Pop(ss *[]string) (string, bool) {
 	return last, true
 }
 
+// SplitByLen 按照固定大小分割
 func SplitByLen(s string, maxLen int) []string {
 	if check.HasHanChar(s) && maxLen < 3 {
 		return []string{}
@@ -267,4 +268,26 @@ func SplitByLen(s string, maxLen int) []string {
 	}
 	splits = append(splits, s[l:])
 	return splits
+}
+
+// Compare 比较两个slice的区别,即各自的差集,如果都为空，则相等
+func Compare(slice1, slice2 []string) ([]string, []string) {
+	diff1 := make([]string, 0)
+	diff2 := make([]string, 0)
+	map2 := make(map[string]struct{})
+	for _, v := range slice2 {
+		map2[v] = struct{}{}
+	}
+	for _, v := range slice1 {
+		_, ok := map2[v]
+		if !ok {
+			diff1 = append(diff1, v)
+		} else {
+			delete(map2, v)
+		}
+	}
+	for k, _ := range map2 {
+		diff2 = append(diff2, k)
+	}
+	return diff1, diff2
 }
