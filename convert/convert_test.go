@@ -60,6 +60,10 @@ func TestStringToUint64(t *testing.T) {
 	assert.Equalf(t, uint64(1234567890123), StringToUint64("1234567890123"), "FAIL")
 }
 
+func TestStringToUint32(t *testing.T) {
+	assert.Equalf(t, uint32(math.MaxUint32), StringToUint32("123456789011"), "FAIL")
+}
+
 func TestIntToUint(t *testing.T) {
 	assert.Equalf(t, uint(1234567), IntToUint(1234567), "FAIL")
 }
