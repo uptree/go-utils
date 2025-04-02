@@ -48,8 +48,16 @@ func TestStringToInt(t *testing.T) {
 	assert.Equalf(t, 1234567, StringToInt("1234567"), "FAIL")
 }
 
+func TestStringToUint(t *testing.T) {
+	assert.Equalf(t, uint(1234567), StringToUint("1234567"), "FAIL")
+}
+
 func TestStringToInt32(t *testing.T) {
 	assert.Equalf(t, int32(1234567), StringToInt32("1234567"), "FAIL")
+}
+
+func TestStringToUint32(t *testing.T) {
+	assert.Equalf(t, uint32(math.MaxUint32), StringToUint32("123456789011"), "FAIL")
 }
 
 func TestStringToInt64(t *testing.T) {
@@ -58,10 +66,6 @@ func TestStringToInt64(t *testing.T) {
 
 func TestStringToUint64(t *testing.T) {
 	assert.Equalf(t, uint64(1234567890123), StringToUint64("1234567890123"), "FAIL")
-}
-
-func TestStringToUint32(t *testing.T) {
-	assert.Equalf(t, uint32(math.MaxUint32), StringToUint32("123456789011"), "FAIL")
 }
 
 func TestIntToUint(t *testing.T) {
