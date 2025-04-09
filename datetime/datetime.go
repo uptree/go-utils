@@ -1,7 +1,6 @@
 package datetime
 
 import (
-	"errors"
 	"time"
 )
 
@@ -134,9 +133,21 @@ func YearEndTime(t time.Time) time.Time {
 }
 
 // TimeDiff 时间差
-func TimeDiff(startTime, endTime time.Time) (time.Duration, error) {
-	if startTime.After(endTime) {
-		return 0, errors.New("end time is earlier than start time")
+func TimeDiff(t1, t2 time.Time) time.Duration {
+	if t1.After(t2) {
+		t1, t2 = t2, t1
 	}
-	return endTime.Sub(startTime), nil
+	return t2.Sub(t1)
+}
+
+// TimeDiffNaturalDays 计算两个时间之间的自然天数
+func TimeDiffNaturalDays(t1, t2 time.Time) int {
+	if t1.After(t2) {
+		t1, t2 = t2, t1
+	}
+	d1 := time.Date(t1.Year(), t1.Month(), t1.Day(), 0, 0, 0, 0, t1.Location())
+	d2 := time.Date(t2.Year(), t2.Month(), t2.Day(), 0, 0, 0, 0, t2.Location())
+	// 计算天数差
+	days := int(d2.Sub(d1).Hours()/24) + 1
+	return days
 }

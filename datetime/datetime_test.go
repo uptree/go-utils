@@ -79,8 +79,19 @@ func TestYearEndTime(t *testing.T) {
 }
 
 func TestTimeDiff(t *testing.T) {
-	diff, err := TimeDiff(YearStartTime(time.Now()), YearStartTime(time.Now()))
-	t.Logf("TimeDiff: %v,err:%v", diff, err)
-	diff, err = TimeDiff(time.Now(), time.Now())
-	t.Logf("TimeDiff: %v,err:%v", diff, err)
+	diff := TimeDiff(YearStartTime(time.Now()), YearStartTime(time.Now()))
+	t.Logf("TimeDiff: %v", diff)
+	diff = TimeDiff(time.Now(), time.Now())
+	t.Logf("TimeDiff: %v", diff)
+}
+
+func TestTimeDiffNaturalDays(t *testing.T) {
+	diff := TimeDiffNaturalDays(YearStartTime(time.Now()), YearEndTime(time.Now()))
+	t.Logf("TimeDiffNaturalDays: %v", diff)
+	diff = TimeDiffNaturalDays(MonthEndTime(time.Now()), MonthStartTime(time.Now()))
+	t.Logf("TimeDiffNaturalDays: %v", diff)
+	diff = TimeDiffNaturalDays(WeekStartTime(time.Now()), time.Now())
+	t.Logf("TimeDiffNaturalDays: %v", diff)
+	diff = TimeDiffNaturalDays(time.Now(), time.Now())
+	t.Logf("TimeDiffNaturalDays: %v", diff)
 }
