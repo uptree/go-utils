@@ -2,7 +2,6 @@ package fileutil
 
 import (
 	"errors"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -19,7 +18,7 @@ func SelfDir() string {
 	return filepath.Dir(SelfPath())
 }
 
-//MkDir 创建目录.
+// MkDir 创建目录.
 func MkDir(dirPath string) error {
 	if IsExist(dirPath) {
 		return nil
@@ -35,7 +34,7 @@ func IsExist(filePath string) bool {
 
 // IsEmpty 判断目录是否为空.
 func IsEmpty(dirname string) bool {
-	dir, _ := ioutil.ReadDir(dirname)
+	dir, _ := os.ReadDir(dirname)
 	if len(dir) == 0 {
 		return true
 	} else {
@@ -61,12 +60,12 @@ func IsDir(filePath string) bool {
 	return f.IsDir()
 }
 
-// ListIndex 目录下文件和子目录列表.
+// ListIndex 目录下文件名和子目录名列表.
 func ListIndex(dirPath string) ([]string, []string, error) {
 	if !IsDir(dirPath) {
 		return nil, nil, errors.New(dirPath + " not a directory")
 	}
-	fs, err := ioutil.ReadDir(dirPath)
+	fs, err := os.ReadDir(dirPath)
 	var files, dirs []string
 	for _, fi := range fs {
 		if !fi.IsDir() {
@@ -80,7 +79,7 @@ func ListIndex(dirPath string) ([]string, []string, error) {
 
 // ClearDir 清空目录下所有文件不包括子目录.
 func ClearDir(dirPath string) error {
-	dir, e := ioutil.ReadDir(dirPath)
+	dir, e := os.ReadDir(dirPath)
 	for _, d := range dir {
 		if d.IsDir() {
 			continue
@@ -92,7 +91,7 @@ func ClearDir(dirPath string) error {
 
 // ClearDirF 清空目录下所有文件和目录.
 func ClearDirF(dirPath string) error {
-	dir, e := ioutil.ReadDir(dirPath)
+	dir, e := os.ReadDir(dirPath)
 	for _, d := range dir {
 		_ = os.RemoveAll(path.Join([]string{dirPath, d.Name()}...))
 	}
@@ -105,4 +104,23 @@ func RemoveDir(dirPath string) error {
 		return errors.New(dirPath + " not a directory")
 	}
 	return os.Remove(dirPath)
+}
+
+// GetAllFiles 获取指定目录下的所有文件路径
+func GetAllFiles(dirPath string) ([]string, error) {
+	var files []string
+	// 使用filepath.Walk遍历目录
+	if err := filepath.Walk(dirPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		// 如果是文件而非目录，则添加到结果中
+		if !info.IsDir() {
+			files = append(files, path)
+		}
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+	return files, nil
 }

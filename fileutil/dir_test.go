@@ -38,6 +38,12 @@ func TestListIndex(t *testing.T) {
 	t.Logf("ListFiles: %v, %v, %v", files, dirs, err)
 }
 
+func TestGetAllFiles(t *testing.T) {
+	dirPath := "testdata"
+	files, err := GetAllFiles(dirPath)
+	t.Logf("GetAllFiles: %v,%v", files, err)
+}
+
 func TestClearDir(t *testing.T) {
 	dirPath := "testdata/dir/dir1"
 	t.Logf("ClearDir: %v", ClearDir(dirPath))
